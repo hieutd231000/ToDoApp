@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+================GIỚI THIỆU================
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Các công nghệ sử dụng
 
-## Available Scripts
+- React router dom v6 :
+  Công dụng: Tạo router cho project.
+  Link: https://reactrouter.com/en/main/start/tutorial
+- MUI :
+  Công dụng : Có thể sử dụng các component có sẵn, sử dụng styled component để viết css
+  Link: https://mui.com/material-ui/react-autocomplete/
 
-In the project directory, you can run:
+2. Cấu trúc dự án
 
-### `npm start`
+- router : Folder chứa config router đường dẫn đến các page.
+- pages : Folder chứa các trang page của project, mỗi page chỉ chứa một Container tương ứng.
+- containers : Folder này chứa folder Layouts và CÁC folder Container
+- layouts : chứa khuân mà nhiều page có thể dùng chung ( dùng để bọc page ). VD page nào cũng dùng chung header và footer, thì ta có thể tạo - layout gồm header và footer đó.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* containers : mỗi container là chứa nội dung page với các file .jsx ,style.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- components : Folder chứa các thành phần nhỏ, PHỔ BIẾN có thể dùng trong tất cả các page. VD như: component button, component card, ...
 
-### `npm test`
+\*\* Ví dụ :
+![image](https://user-images.githubusercontent.com/79511601/204137775-d3a36592-7c01-4018-b963-f68e5cf720d2.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+\*\* Cách viết styled component: Styled component các viết khá giống với sass/scss. Ưu điểm có thể truyền props vào trong file style này. Mình đã viết ví dụ cách dùng trong container SignUp. Mọi người vào xem qua nhé.
