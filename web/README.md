@@ -21,6 +21,6 @@
 - components : Folder chứa các thành phần nhỏ, PHỔ BIẾN có thể dùng trong tất cả các page. VD như: component button, component card, ...
 
 \*\* Ví dụ :
-![image](https://user-images.githubusercontent.com/79511601/204137775-d3a36592-7c01-4018-b963-f68e5cf720d2.png)
+https://user-images.githubusercontent.com/79511601/204137775-d3a36592-7c01-4018-b963-f68e5cf720d2.png
 
 \*\* Cách viết styled component: Styled component các viết khá giống với sass/scss. Ưu điểm có thể truyền props vào trong file style này. Mình đã viết ví dụ cách dùng trong container SignUp. Mọi người vào xem qua nhé.
