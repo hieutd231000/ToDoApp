@@ -27,8 +27,7 @@ export const LogInLayoutStyle = styled('div')`
         z-index: -1;
     }
     .LogInBox {
-        width: 500px;
-        padding: 32px;
+        padding: 20px 32px;
         margin: 40px;
         background-color: white;
         border-radius: 32px;
@@ -41,8 +40,12 @@ export const LogInLayoutStyle = styled('div')`
            background-image: url(${Logo});
            background-repeat: no-repeat;
            background-size: cover;
-           width: 40%;
-           height: 200px;
+           width: 120px;
+           height: 120px;
+        }
+
+        .Content {
+            width: 100%;
         }
     }
 `
