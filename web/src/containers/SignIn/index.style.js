@@ -48,5 +48,16 @@ export const SignInStyle = styled('form')`
                 text-decoration: underline;
             }
         }
+
+        p {
+            cursor: pointer;
+            color: #ccc;
+            text-align: center;
+            padding: 20px;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 `

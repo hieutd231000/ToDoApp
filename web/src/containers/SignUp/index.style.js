@@ -38,7 +38,7 @@ export const SignUpStyle = styled('form')`
             margin-top: 20px;
         }
         
-        a {
+        p {
             cursor: pointer;
             color: #ccc;
             text-align: center;

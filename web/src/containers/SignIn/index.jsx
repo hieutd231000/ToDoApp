@@ -7,6 +7,8 @@ import PersonIcon from '@mui/icons-material/Person'
 import EmailIcon from '@mui/icons-material/Email'
 import LockPersonIcon from '@mui/icons-material/LockPerson'
 import Button from '../../components/Button'
+import { useNavigate } from 'react-router-dom'
+
 
 const SignIn = () => {
   const [email, setEmail] = useState('')
@@ -17,6 +19,8 @@ const SignIn = () => {
 
   const [passError, setPassError] = useState(false)
   const [passErrorText, setPassErrorText] = useState('')
+
+  const navigate = useNavigate()
 
   const handleEmail = e => {
     if (!e.target.value) {
@@ -91,7 +95,7 @@ const SignIn = () => {
         </Box>
         <div className='Bottom'>
           <Button type='submit'>ログインする</Button>
-          <a href='/sign-up'>サインアップ</a>
+          <p onClick={() => navigate('/sign-up')}>サインアップ</p>
         </div>
       </SignInStyle>
     </LogInLayout>
