@@ -84,11 +84,24 @@ class AuthController extends Controller
         );
         if(Auth::attempt($user_data)){
             $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')-> accessToken;
+            $success['token'] =  $user->createToken('Token Name')-> accessToken;
             return $this->responseHelper->success($success);
         }
         else{
             return $this->responseHelper->unAuthenticated();
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \App\Helpers\JsonResponse
+     */
+    public function processLogout(Request $request){
+        if (Auth::check()) {
+            Auth::user()->token()->revoke();
+            return $this->responseHelper->success();
+        }else{
+            return $this->responseHelper->error();
         }
     }
 }
