@@ -1,14 +1,13 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { SignInStyle } from './index.style'
 import LogInLayout from '../layouts/LogInLayout'
 import { Box } from '@mui/material'
 import TextField from '@mui/material/TextField'
-import PersonIcon from '@mui/icons-material/Person'
 import EmailIcon from '@mui/icons-material/Email'
 import LockPersonIcon from '@mui/icons-material/LockPerson'
 import Button from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
-
+import axios from 'axios'
 
 const SignIn = () => {
   const [email, setEmail] = useState('')
@@ -52,14 +51,17 @@ const SignIn = () => {
     }
   }
 
+  let data = { email, password }
+
   const handleSubmit = e => {
     e.preventDefault()
     if (emailError || passError) return false
-    console.log({
-      mail: email,
-      pass: password,
+    axios.post('http://127.0.0.1:8000/api/login', data).then(res => {
+      localStorage.setItem('todoapp_token', JSON.stringify(res.data.data.token))
+      if (res.data.code === 200) {
+        navigate('/home')
+      }
     })
-    navigate('/home')
   }
 
   return (
