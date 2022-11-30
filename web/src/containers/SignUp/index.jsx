@@ -1,13 +1,15 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 import { SignUpStyle } from './index.style'
 import LogInLayout from '../layouts/LogInLayout'
+
 import { Box } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import PersonIcon from '@mui/icons-material/Person'
 import EmailIcon from '@mui/icons-material/Email'
 import LockPersonIcon from '@mui/icons-material/LockPerson'
 import Button from '../../components/Button'
-import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
   const [username, setUsername] = useState('')
@@ -46,9 +48,9 @@ const SignUp = () => {
     if (!e.target.value) {
       setPassError(true)
       setPassErrorText('Password is required')
-    } else if (e.target.value !== '' && e.target.value.length < 4) {
+    } else if (e.target.value !== '' && e.target.value.length < 6) {
       setPassError(true)
-      setPassErrorText('Least 4 characters')
+      setPassErrorText('Least 6 characters')
     } else if (confirm && e.target.value !== '' && e.target.value !== confirm) {
       setConfirmError(true)
       setConfirmErrorText('Confirm Password is not match!')
@@ -76,16 +78,23 @@ const SignUp = () => {
     }
   }
 
+  let data = {
+    name: username,
+    email: email,
+    password: password,
+    c_password: confirm,
+  }
+
   const handleSubmit = e => {
     e.preventDefault()
     if (emailError || passError || confirmError) return false
-    navigate('/home')
-    console.log({
-      name: username,
-      mail: email,
-      pass: password,
-      confirm: confirm,
+    console.log(data)
+    axios.post('http://127.0.0.1:8000/api/signup', data).then(res => {
+      console.log(res)
+      console.log(res.data)
     })
+
+    navigate('/home')
   }
 
   return (
