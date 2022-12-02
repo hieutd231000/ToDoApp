@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8bfeecd7-0d4d-4317-99e2-5a88f8aaa9e9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ToDoApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ToDoApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/composer.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/config/app.php" afterDir="false" />
-    </list>
+    <list default="true" id="8bfeecd7-0d4d-4317-99e2-5a88f8aaa9e9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
