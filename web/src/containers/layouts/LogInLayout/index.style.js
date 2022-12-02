@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles'
 import background from '../../../assets/images/login_bg.png'
-import Logo from '../../../assets/images/logo.png'
+import Logo from '../../../assets/images/Logo.AyIh1VuDa'
 
 export const LogInLayoutStyle = styled('div')`
     width: 100%;
@@ -17,9 +17,6 @@ export const LogInLayoutStyle = styled('div')`
 
     &:after {
         content: "";
-        background-image: url(${background});
-        background-repeat: no-repeat;
-        background-size: cover;
         background-position: 50% 0;
         opacity: 0.5;
         position: absolute;
@@ -40,8 +37,14 @@ export const LogInLayoutStyle = styled('div')`
            background-image: url(${Logo});
            background-repeat: no-repeat;
            background-size: cover;
-           width: 120px;
+           width: 160px;
            height: 120px;
+        }
+
+        .Title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 8px;
         }
 
         .Content {

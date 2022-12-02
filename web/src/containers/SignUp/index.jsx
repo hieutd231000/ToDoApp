@@ -31,12 +31,12 @@ const SignUp = () => {
   const handleEmail = e => {
     if (!e.target.value) {
       setEmailError(true)
-      setEmailErrorText('Email is required')
+      setEmailErrorText('メールアドレス必須')
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(e.target.value)
     ) {
       setEmailError(true)
-      setEmailErrorText('Invalid email address')
+      setEmailErrorText('無効な電子メールアドレス')
     } else {
       setEmailError(false)
       setEmailErrorText(false)
@@ -47,13 +47,13 @@ const SignUp = () => {
   const handlePassword = e => {
     if (!e.target.value) {
       setPassError(true)
-      setPassErrorText('Password is required')
+      setPassErrorText('パスワード必須')
     } else if (e.target.value !== '' && e.target.value.length < 6) {
       setPassError(true)
-      setPassErrorText('Least 6 characters')
+      setPassErrorText('6 文字以上')
     } else if (confirm && e.target.value !== '' && e.target.value !== confirm) {
       setConfirmError(true)
-      setConfirmErrorText('Confirm Password is not match!')
+      setConfirmErrorText('確認 パスワードが一致しません!')
     } else {
       setPassError(false)
       setPassErrorText('')
@@ -92,8 +92,7 @@ const SignUp = () => {
       console.log(res)
       console.log(res.data)
     })
-
-    navigate('/home')
+    navigate('/sign-in')
   }
 
   return (

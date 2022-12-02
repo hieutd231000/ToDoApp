@@ -23,6 +23,7 @@ const SignOut = () => {
       .post('http://127.0.0.1:8000/api/logout', bodyParameters, config)
       .then(res => {
         if (res.data.code === 200) {
+          localStorage.removeItem('todoapp_token')
           navigate('/sign-in')
         }
       })

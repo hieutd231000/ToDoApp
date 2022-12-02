@@ -7,6 +7,8 @@ import EmailIcon from '@mui/icons-material/Email'
 import LockPersonIcon from '@mui/icons-material/LockPerson'
 import Button from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
+import CircularProgress from '@mui/material/CircularProgress'
+
 import axios from 'axios'
 
 const SignIn = () => {
@@ -19,17 +21,20 @@ const SignIn = () => {
   const [passError, setPassError] = useState(false)
   const [passErrorText, setPassErrorText] = useState('')
 
+  const [loginFail, setLoginFail] = useState(false)
+  const [loading, setLoading] = useState(false)
+
   const navigate = useNavigate()
 
   const handleEmail = e => {
     if (!e.target.value) {
       setEmailError(true)
-      setEmailErrorText('Email is required')
+      setEmailErrorText('メールアドレス必須')
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(e.target.value)
     ) {
       setEmailError(true)
-      setEmailErrorText('Invalid email address')
+      setEmailErrorText('無効な電子メールアドレス')
     } else {
       setEmailError(false)
       setEmailErrorText(false)
@@ -38,12 +43,13 @@ const SignIn = () => {
   }
 
   const handlePassword = e => {
+    setLoginFail(false)
     if (!e.target.value) {
       setPassError(true)
-      setPassErrorText('Password is required')
-    } else if (e.target.value !== '' && e.target.value.length < 4) {
+      setPassErrorText('パスワード必須')
+    } else if (e.target.value !== '' && e.target.value.length < 6) {
       setPassError(true)
-      setPassErrorText('Least 4 characters')
+      setPassErrorText('6 文字以上')
     } else {
       setPassError(false)
       setPassErrorText('')
@@ -55,13 +61,21 @@ const SignIn = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
+    setLoading(true)
     if (emailError || passError) return false
-    axios.post('http://127.0.0.1:8000/api/login', data).then(res => {
-      localStorage.setItem('todoapp_token', JSON.stringify(res.data.data.token))
-      if (res.data.code === 200) {
+    axios
+      .post('http://127.0.0.1:8000/api/login', data)
+      .then(res => {
+        localStorage.setItem(
+          'todoapp_token',
+          JSON.stringify(res.data.data.token),
+        )
         navigate('/home')
-      }
-    })
+      })
+      .catch(err => {
+        setLoginFail(true)
+        setLoading(false)
+      })
   }
 
   return (
@@ -96,10 +110,25 @@ const SignIn = () => {
             required
           />
         </Box>
+
+        {loginFail ? (
+          <span className='LogInFail'>
+            メールアドレスまたはパスワードが正しくない
+          </span>
+        ) : (
+          ''
+        )}
         <div className='Bottom'>
           <Button type='submit'>ログインする</Button>
           <p onClick={() => navigate('/sign-up')}>サインアップ</p>
         </div>
+        {loading ? (
+          <div className='Loading'>
+            <CircularProgress disableShrink />
+          </div>
+        ) : (
+          ''
+        )}
       </SignInStyle>
     </LogInLayout>
   )
