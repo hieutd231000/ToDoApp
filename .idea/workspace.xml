@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bfeecd7-0d4d-4317-99e2-5a88f8aaa9e9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/api/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ToDoApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ToDoApp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/composer.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/config/app.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,6 +134,29 @@
       <path value="$PROJECT_DIR$/api/vendor/fruitcake/laravel-cors" />
       <path value="$PROJECT_DIR$/api/vendor/opis/closure" />
       <path value="$PROJECT_DIR$/api/vendor/asm89/stack-cors" />
+      <path value="$PROJECT_DIR$/api/vendor/league/uri" />
+      <path value="$PROJECT_DIR$/api/vendor/league/event" />
+      <path value="$PROJECT_DIR$/api/vendor/league/oauth2-server" />
+      <path value="$PROJECT_DIR$/api/vendor/league/uri-interfaces" />
+      <path value="$PROJECT_DIR$/api/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/api/vendor/symfony/psr-http-message-bridge" />
+      <path value="$PROJECT_DIR$/api/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/api/vendor/defuse/php-encryption" />
+      <path value="$PROJECT_DIR$/api/vendor/stella-maris/clock" />
+      <path value="$PROJECT_DIR$/api/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/api/vendor/lcobucci/clock" />
+      <path value="$PROJECT_DIR$/api/vendor/laravel/passport" />
+      <path value="$PROJECT_DIR$/api/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/api/vendor/paragonie/constant_time_encoding" />
+      <path value="$PROJECT_DIR$/api/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/api/vendor/php-http/message-factory" />
+      <path value="$PROJECT_DIR$/api/vendor/nyholm/psr7" />
+      <path value="$PROJECT_DIR$/api/vendor/zircote/swagger-php" />
+      <path value="$PROJECT_DIR$/api/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/api/vendor/swagger-api/swagger-ui" />
+      <path value="$PROJECT_DIR$/api/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/api/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/api/vendor/darkaonline/l5-swagger" />
     </include_path>
   </component>
   <component name="ProjectId" id="2I2qaMouJp50KS5QTydLaeqy6Ta" />
@@ -146,6 +174,24 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration default="true" type="SwaggerCodegen">
+      <option name="activeConfigurationType" value="FILE" />
+      <option name="configurationPath" value="" />
+      <option name="customJreEnabled" value="false" />
+      <option name="customTemplatesPath" value="" />
+      <option name="enableDebugLogging" value="false" />
+      <option name="generateToPath" value="$PROJECT_DIR$/gen" />
+      <option name="generationParameters">
+        <list />
+      </option>
+      <option name="generatorPath" value="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/5.0.0/openapi-generator-cli-5.0.0.jar" />
+      <option name="jdkPath" value="" />
+      <option name="language" value="java" />
+      <option name="specificationPath" value="$PROJECT_DIR$/api/storage/api-docs/api-docs.json" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -155,7 +201,9 @@
       <option name="presentableId" value="Default" />
       <updated>1669390089117</updated>
       <workItem from="1669390090678" duration="217000" />
-      <workItem from="1669735148311" duration="7083000" />
+      <workItem from="1669735148311" duration="11326000" />
+      <workItem from="1669879126619" duration="6033000" />
+      <workItem from="1669945556443" duration="1199000" />
     </task>
     <servers />
   </component>
