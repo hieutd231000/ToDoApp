@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import axios from 'axios'
+import Loading from '../../components/Loading'
 
 const SignIn = () => {
   const [email, setEmail] = useState('')
@@ -122,13 +123,7 @@ const SignIn = () => {
           <Button type='submit'>ログインする</Button>
           <p onClick={() => navigate('/sign-up')}>サインアップ</p>
         </div>
-        {loading ? (
-          <div className='Loading'>
-            <CircularProgress disableShrink />
-          </div>
-        ) : (
-          ''
-        )}
+        {loading ? <Loading /> : ''}
       </SignInStyle>
     </LogInLayout>
   )
