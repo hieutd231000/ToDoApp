@@ -47,7 +47,7 @@ class ToDoController extends Controller
      * @param Request $request
      * @return \App\Helpers\JsonResponse
      */
-    public function add(Request  $request) {
+    public function add(Request $request) {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'status' => 'required|numeric|between:0,3',
@@ -57,6 +57,22 @@ class ToDoController extends Controller
         }
         $data = $request->all();
         $data["user_id"] = Auth::id();
+        switch ($request['status']) {
+            case 0:
+                $data["status"] = "対応しない";
+                break;
+            case 1:
+                $data["status"] = "未対応";
+                break;
+            case 2:
+                $data["status"] = "対応中";;
+                break;
+            case 3:
+                $data["status"] = "完了";;
+                break;
+            default:
+                break;
+        }
         try {
             $item = $this->toDoRepository->create($data);
             return $this->responseHelper->success($item);
@@ -106,8 +122,25 @@ class ToDoController extends Controller
         if ($validator->fails()) {
             return $this->responseHelper->validation($validator->errors());
         }
+        $data = $request->all();
+        switch ($request['status']) {
+            case 0:
+                $data["status"] = "対応しない";
+                break;
+            case 1:
+                $data["status"] = "未対応";
+                break;
+            case 2:
+                $data["status"] = "対応中";;
+                break;
+            case 3:
+                $data["status"] = "完了";;
+                break;
+            default:
+                break;
+        }
         try {
-            $item = $this->toDoRepository->update($request->all(), $todo->id);
+            $item = $this->toDoRepository->update($data, $todo->id);
             return $this->responseHelper->success($item);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
