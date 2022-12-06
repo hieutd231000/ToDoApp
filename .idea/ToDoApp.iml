@@ -138,6 +138,10 @@
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/symfony/yaml" />
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/psr/cache" />
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/darkaonline/l5-swagger" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/doctrine/event-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/doctrine/cache" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

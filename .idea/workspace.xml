@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8bfeecd7-0d4d-4317-99e2-5a88f8aaa9e9" name="Changes" comment="" />
+    <list default="true" id="8bfeecd7-0d4d-4317-99e2-5a88f8aaa9e9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/ToDoApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ToDoApp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/Api/ToDoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/Api/ToDoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app/Repositories/ToDo/ToDoEloquentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Repositories/ToDo/ToDoEloquentRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/package-lock.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -149,6 +157,10 @@
       <path value="$PROJECT_DIR$/api/vendor/symfony/yaml" />
       <path value="$PROJECT_DIR$/api/vendor/psr/cache" />
       <path value="$PROJECT_DIR$/api/vendor/darkaonline/l5-swagger" />
+      <path value="$PROJECT_DIR$/api/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/api/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/api/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/api/vendor/doctrine/cache" />
     </include_path>
   </component>
   <component name="ProjectId" id="2I2qaMouJp50KS5QTydLaeqy6Ta" />
@@ -196,6 +208,9 @@
       <workItem from="1669735148311" duration="11326000" />
       <workItem from="1669879126619" duration="6033000" />
       <workItem from="1669945556443" duration="1199000" />
+      <workItem from="1670080427534" duration="7557000" />
+      <workItem from="1670244358584" duration="1851000" />
+      <workItem from="1670352362903" duration="1696000" />
     </task>
     <servers />
   </component>

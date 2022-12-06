@@ -21,9 +21,10 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [\App\Http\Controllers\Api\AuthController::class, 'processLogout']);
     Route::group(["prefix" => "todo"], function () {
         Route::get("/", [\App\Http\Controllers\Api\ToDoController::class, 'index']);
+        Route::get("/{id}/getTask", [\App\Http\Controllers\Api\ToDoController::class, 'getTaskById']);
         Route::post("/add", [\App\Http\Controllers\Api\ToDoController::class, 'add']);
         Route::post("/{id}/update", [\App\Http\Controllers\Api\ToDoController::class, 'update']);
-        Route::get("/{id}/delete", [\App\Http\Controllers\Api\ToDoController::class, 'delete']);
+        Route::post("/{id}/delete", [\App\Http\Controllers\Api\ToDoController::class, 'delete']);
     });
     Route::group(["prefix" => "reminder"], function () {
         Route::get("/{id}", [\App\Http\Controllers\Api\ToDoController::class, 'getReminder']);
