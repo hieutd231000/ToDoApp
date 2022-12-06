@@ -34,6 +34,29 @@ class ToDoController extends Controller
     public function index(Request $request) {
         try {
             $data = $this->toDoRepository->getList(Auth::id());
+            foreach ($data as $value) {
+                if(isset($value->created_at)) {
+                    $date = explode(' ',$value->created_at);
+                    $value->created_at = $date[0];
+                }
+            }
+            return $this->responseHelper->success($data);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return $this->responseHelper->error();
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return \App\Helpers\JsonResponse
+     */
+    public function getTaskById(Request $request, $id) {
+        try {
+            $data = $this->toDoRepository->find($id);
+            if(empty($data) || $data->user_id != Auth::id()) {
+                return $this->responseHelper->notFound("Not found");
+            }
             return $this->responseHelper->success($data);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());

@@ -22,7 +22,7 @@ class ToDoEloquentRepository extends EloquentRepository implements ToDoRepositor
     public function getList($user_id)
     {
         return DB::table("to_dos")
-            ->select("title as task_name", "status", "created_at")
+            ->select("id", "user_id", "title as task_name", "status", "created_at")
             ->where("user_id", $user_id)
             ->get();
     }
