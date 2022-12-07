@@ -77,63 +77,53 @@ const TodoTable = () => {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
+                  style={{ minWidth: column.minWidth }}>
                   {column.label}
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {data ? (
-              data
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(row => {
-                  return (
-                    <TableRow
-                      hover
-                      role='checkbox'
-                      tabIndex={-1}
-                      key={row.code}
-                    >
-                      {columns.map(column => {
-                        const value =
-                          column.id === 'action' ? (
-                            <>
-                              <NotificationsActiveOutlinedIcon
-                                onClick={() =>
-                                  navigate(`/tasks/${row.id}/reminder-task`)
-                                }
-                              />
-                              <EditOutlinedIcon
-                                style={{ padding: '0 20px' }}
-                                onClick={() =>
-                                  navigate(`/tasks/${row.id}/edit-task`)
-                                }
-                              />
-                              <DeleteOutlineOutlinedIcon
-                                onClick={e => {
-                                  handleDelete(row.id)
-                                }}
-                              />
-                            </>
-                          ) : (
-                            row[column.id]
-                          )
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number'
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
+            {data
+              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => {
+                return (
+                  <TableRow hover role='checkbox' tabIndex={-1} key={index}>
+                    {columns.map(column => {
+                      const value =
+                        column.id === 'action' ? (
+                          <>
+                            <NotificationsActiveOutlinedIcon
+                              onClick={() =>
+                                navigate(`/tasks/${row.id}/reminder-task`)
+                              }
+                            />
+                            <EditOutlinedIcon
+                              style={{ padding: '0 20px' }}
+                              onClick={() =>
+                                navigate(`/tasks/${row.id}/edit-task`)
+                              }
+                            />
+                            <DeleteOutlineOutlinedIcon
+                              onClick={e => {
+                                handleDelete(row.id)
+                              }}
+                            />
+                          </>
+                        ) : (
+                          row[column.id]
                         )
-                      })}
-                    </TableRow>
-                  )
-                })
-            ) : (
-              <></>
-            )}
+                      return (
+                        <TableCell key={column.id} align={column.align}>
+                          {column.format && typeof value === 'number'
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      )
+                    })}
+                  </TableRow>
+                )
+              })}
           </TableBody>
         </Table>
       </TableContainer>
