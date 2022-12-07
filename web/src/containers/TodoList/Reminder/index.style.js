@@ -8,8 +8,9 @@ export const ReminderStyle = styled('form')`
     align-items: center;
 
     .title {
-        font-size: 24px;
+        font-size: 30px;
         font-weight: bold;
+        margin-bottom: 60px;
     }
 
     .MuiBox-root {

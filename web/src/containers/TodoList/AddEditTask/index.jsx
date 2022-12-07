@@ -10,8 +10,8 @@ import Loading from '../../../components/Loading'
 import { useEffect } from 'react'
 
 const AddEditTask = () => {
-  const [title, setTitle] = useState()
-  const [status, setStatus] = useState()
+  const [title, setTitle] = useState('')
+  const [status, setStatus] = useState('')
 
   const [loading, setLoading] = useState(false)
 
@@ -28,23 +28,39 @@ const AddEditTask = () => {
     status,
   }
 
-  // get current task
-  if (params.id) {
-    useEffect(() => {
-      axios
-        .get(`http://127.0.0.1:8000/api/todo/${params.id}/getTask`, config)
-        .then(res => {
-          setTitle(res.data.data.title)
-          setStatus(res.data.data.status)
-        })
-        .catch(error => console.log(error))
-    }, [])
+  // convert string status to number
+  const convertStatus = status => {
+    var num = -1
+    switch (status) {
+      case '対応しない':
+        return (num = 0)
+      case '未対応':
+        return (num = 1)
+      case '対応中':
+        return (num = 2)
+      case '完了':
+        return (num = 3)
+      default:
+        return num
+    }
   }
+
+  // get current task
+  useEffect(() => {
+    axios
+      .get(`http://127.0.0.1:8000/api/todo/${params.id}/getTask`, config)
+      .then(res => {
+        setTitle(res.data.data.title)
+        setStatus(convertStatus(res.data.data.status))
+      })
+      .catch(error => console.log(error))
+  }, [])
 
   // submit task
   const handleSubmit = e => {
     e.preventDefault()
     setLoading(true)
+    console.log(bodyParameters)
     if (params.id) {
       axios
         .post(
@@ -74,21 +90,7 @@ const AddEditTask = () => {
     }
   }
 
-  // convert string status to number
-  const convertStatus = str => {
-    switch (str) {
-      case '対応しない':
-        return 0
-      case '未対応':
-        return 1
-      case '対応中':
-        return 2
-      case '完了':
-        return 3
-      default:
-        return ''
-    }
-  }
+  console.log(status)
 
   return (
     <TodoLayout>
@@ -97,10 +99,10 @@ const AddEditTask = () => {
           <p>タスク</p>
           <TextField
             id='title'
-            label='タスクを入力する'
+            // label='タスクを入力する'
             variant='outlined'
+            value={title}
             onChange={e => setTitle(e.target.value)}
-            defaultValue={title ? title : ''}
           />
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -112,10 +114,9 @@ const AddEditTask = () => {
             <Select
               labelId='demo-simple-select-label'
               id='status'
-              defaultValue={convertStatus(status)}
+              value={status}
               label='スステータスを選択する'
-              onChange={e => setStatus(e.target.value)}
-            >
+              onChange={e => setStatus(e.target.value)}>
               <MenuItem value={0}>対応しない</MenuItem>
               <MenuItem value={1}>未対応</MenuItem>
               <MenuItem value={2}>対応中</MenuItem>
