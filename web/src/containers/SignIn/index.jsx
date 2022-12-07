@@ -7,7 +7,6 @@ import EmailIcon from '@mui/icons-material/Email'
 import LockPersonIcon from '@mui/icons-material/LockPerson'
 import Button from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
-import CircularProgress from '@mui/material/CircularProgress'
 
 import axios from 'axios'
 import Loading from '../../components/Loading'
