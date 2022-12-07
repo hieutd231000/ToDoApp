@@ -1,5 +1,4 @@
 import { styled } from '@mui/material/styles'
-import background from '../../../assets/images/login_bg.png'
 import Logo from '../../../assets/images/Logo.AyIh1VuDa'
 
 export const LogInLayoutStyle = styled('div')`

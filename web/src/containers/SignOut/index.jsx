@@ -21,12 +21,11 @@ const SignOut = () => {
     e.preventDefault()
     axios
       .post('http://127.0.0.1:8000/api/logout', bodyParameters, config)
-      .then(res => {
-        if (res.data.code === 200) {
-          localStorage.removeItem('todoapp_token')
-          navigate('/sign-in')
-        }
+      .then(response => {
+        localStorage.removeItem('todoapp_token')
+        navigate('/sign-in')
       })
+      .catch(error => console.log(error))
   }
 
   return (
