@@ -30,5 +30,12 @@ Route::middleware('auth:api')->group(function () {
         Route::get("/{id}", [\App\Http\Controllers\Api\ToDoController::class, 'getReminder']);
         Route::post("/{id}/update", [\App\Http\Controllers\Api\ToDoController::class, 'updateReminder']);
     });
+
+    Route::group(["prefix" => "music"], function () {
+        Route::get("/", [\App\Http\Controllers\Api\MusicController::class, 'index']);
+        Route::post("/add", [\App\Http\Controllers\Api\MusicController::class, 'add']);
+        Route::post("/{id}/update", [\App\Http\Controllers\Api\MusicController::class, 'update']);
+        Route::post("/{id}/delete", [\App\Http\Controllers\Api\MusicController::class, 'delete']);
+    });
 });
 
