@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Music\MusicEloquentRepository;
+use App\Repositories\Music\MusicRepositoryInterface;
 use App\Repositories\ToDo\ToDoEloquentRepository;
 use App\Repositories\ToDo\ToDoRepositoryInterface;
 use App\Repositories\Users\UserEloquentRepository;
@@ -25,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             ToDoRepositoryInterface::class,
             ToDoEloquentRepository::class,
+        );
+
+        $this->app->bind(
+            MusicRepositoryInterface::class,
+            MusicEloquentRepository::class,
         );
     }
 
