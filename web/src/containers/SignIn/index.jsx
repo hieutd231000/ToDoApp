@@ -37,7 +37,7 @@ const SignIn = () => {
       setEmailErrorText('無効な電子メールアドレス')
     } else {
       setEmailError(false)
-      setEmailErrorText(false)
+      setEmailErrorText('')
       setEmail(e.target.value)
     }
   }

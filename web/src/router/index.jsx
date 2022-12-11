@@ -8,6 +8,7 @@ import SignUpPage from '../pages/SignUpPage'
 import HomePage from '../pages/HomePage'
 import AddEditTask from '../containers/TodoList/AddEditTask'
 import Reminder from '../containers/TodoList/Reminder'
+import Countdown from '../containers/Countdown'
 
 export const router = createBrowserRouter([
   {
@@ -37,5 +38,9 @@ export const router = createBrowserRouter([
   {
     path: '/tasks/:id/reminder-task',
     element: <Reminder />,
+  },
+  {
+    path: '/tasks/countdown',
+    element: <Countdown />,
   },
 ])

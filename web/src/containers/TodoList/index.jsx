@@ -9,14 +9,12 @@ const TodoList = () => {
 
   return (
     <TodoListStyle>
-      <>
-        <div className='Add'>
-          <PostAddIcon onClick={() => navigate('/tasks/add-task')} />
-        </div>
-        <div className='TodoTable'>
-          <TodoTable />
-        </div>
-      </>
+      <div className='Add'>
+        <PostAddIcon onClick={() => navigate('/tasks/add-task')} />
+      </div>
+      <div className='TodoTable'>
+        <TodoTable />
+      </div>
     </TodoListStyle>
   )
 }

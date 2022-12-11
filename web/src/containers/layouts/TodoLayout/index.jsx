@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
 import { HomeStyle } from '../../Home/index.style'
+import SignOut from '../../SignOut'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props
@@ -16,8 +17,7 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
+      {...other}>
       {value === index && (
         <Box sx={{ p: 3 }}>
           <Typography component={'span'}>{children}</Typography>
@@ -48,33 +48,34 @@ export default function TodoLayout({ children }) {
   }
 
   return (
-    <HomeStyle
-      sx={{
-        flexGrow: 1,
-        display: 'flex',
-      }}
-    >
-      <Tabs
-        orientation='vertical'
-        variant='scrollable'
-        value={value}
-        onChange={handleChange}
-        aria-label='Vertical tabs example'
-        sx={{ borderRight: 1, borderColor: 'divider' }}
-      >
-        <Tab label='Todoリスト' {...a11yProps(0)} />
-        <Tab label='音楽を聴く' {...a11yProps(1)} />
-        <Tab label='タイマー設定' {...a11yProps(2)} />
-      </Tabs>
-      <TabPanel className='TabPanel' value={value} index={0}>
-        {children}
-      </TabPanel>
-      <TabPanel className='TabPanel' value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel className='TabPanel' value={value} index={2}>
-        Item Three
-      </TabPanel>
-    </HomeStyle>
+    <>
+      <SignOut />
+      <HomeStyle
+        sx={{
+          flexGrow: 1,
+          display: 'flex',
+        }}>
+        <Tabs
+          orientation='vertical'
+          variant='scrollable'
+          value={value}
+          onChange={handleChange}
+          aria-label='Vertical tabs example'
+          sx={{ borderRight: 1, borderColor: 'divider' }}>
+          <Tab label='Todoリスト' {...a11yProps(0)} />
+          <Tab label='音楽を聴く' {...a11yProps(1)} />
+          <Tab label='タイマー設定' {...a11yProps(2)} />
+        </Tabs>
+        <TabPanel className='TabPanel' value={value} index={0}>
+          {children}
+        </TabPanel>
+        <TabPanel className='TabPanel' value={value} index={1}>
+          音楽を聴く
+        </TabPanel>
+        <TabPanel className='TabPanel' value={value} index={2}>
+          タイマー設定
+        </TabPanel>
+      </HomeStyle>
+    </>
   )
 }

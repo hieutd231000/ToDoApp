@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { StatusColor, DeleteModal } from './index.style'
+import Button from '../../components/Button'
 
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -14,6 +16,7 @@ import TableRow from '@mui/material/TableRow'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
+import { Box, Modal } from '@mui/material'
 
 const columns = [
   { id: 'task_name', label: 'タスク', minWidth: 300, align: 'center' },
@@ -24,7 +27,8 @@ const columns = [
 
 const TodoTable = () => {
   const [data, setData] = useState()
-
+  const [open, setOpen] = useState(false)
+  const [activeModal, setActiveModal] = useState(null)
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
 
@@ -67,6 +71,34 @@ const TodoTable = () => {
     )
   }
 
+  const handleClose = () => {
+    setOpen(false)
+    setActiveModal(null)
+  }
+  const handleOpen = index => {
+    setActiveModal(index)
+  }
+
+  // handle status color
+  const handleStatusColor = status => {
+    switch (status) {
+      case '対応しない':
+        return <StatusColor bgColor='blue'>{status}</StatusColor>
+      case '未対応':
+        return <StatusColor bgColor='red'>{status}</StatusColor>
+      case '対応中':
+        return (
+          <StatusColor bgColor='yellow' color='black'>
+            {status}
+          </StatusColor>
+        )
+      case '完了':
+        return <StatusColor bgColor='green'>{status}</StatusColor>
+      default:
+        break
+    }
+  }
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -106,10 +138,35 @@ const TodoTable = () => {
                             />
                             <DeleteOutlineOutlinedIcon
                               onClick={e => {
-                                handleDelete(row.id)
+                                handleOpen(row.id)
                               }}
                             />
+                            <Modal
+                              open={activeModal === row.id}
+                              onClose={() => setOpen(false)}>
+                              <DeleteModal>
+                                <div className='title'>
+                                  このタスクを削除してもよろしいですか?
+                                </div>
+                                <div className='footer'>
+                                  <Button>
+                                    <p onClick={() => handleClose()}>いいえ</p>
+                                  </Button>
+                                  <Button>
+                                    <p
+                                      onClick={() => {
+                                        handleDelete(row.id)
+                                        handleClose()
+                                      }}>
+                                      はい
+                                    </p>
+                                  </Button>
+                                </div>
+                              </DeleteModal>
+                            </Modal>
                           </>
+                        ) : column.id === 'status' ? (
+                          handleStatusColor(row[column.id])
                         ) : (
                           row[column.id]
                         )
