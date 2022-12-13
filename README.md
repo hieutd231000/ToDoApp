@@ -5,7 +5,15 @@
 * Laravel 8(PHP)
 * PHPMyadmin (MySQL)
 
-### I. Set up Instruction using Xampp 
+### I. Set up use Docker
+##### 1. API
+
+[API Readme.md](api/README.md)
+
+##### 2. WEB
+
+[Web Readme.md](web/README.md)
+### II. Set up Instruction using Xampp 
 * Make sure you have the following tool(s) installed: 
   * **npm/npx** and **node**
   * **php version 7.0** and **composer** 
@@ -49,5 +57,6 @@
  .../ToDoApp/api $ php artisan key:generate
  .../ToDoApp/api $ php artisan serve
 ```
+
 
 
