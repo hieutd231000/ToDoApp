@@ -53,7 +53,6 @@ class MusicController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'link' => 'required|string|max:255',
-            'artist' => 'required|string|max:255',
             'category_id' => 'required|numeric|between:1,4',
         ]);
         if ($validator->fails()) {
@@ -61,6 +60,7 @@ class MusicController extends Controller
         }
         $data = $request->all();
         $data["user_id"] = Auth::id();
+        $data["artist"] = "";
         try {
             $item = $this->musicRepository->create($data);
             return $this->responseHelper->success($item);

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { StatusColor, DeleteModal } from './index.style'
 import Button from '../../components/Button'
+import Notification from './Notification'
 
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -99,8 +100,11 @@ const TodoTable = () => {
     }
   }
 
+  console.log(data)
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <Notification />
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label='sticky table'>
           <TableHead>
@@ -109,78 +113,87 @@ const TodoTable = () => {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}>
+                  style={{ minWidth: column.minWidth }}
+                >
                   {column.label}
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {data
-              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => {
-                return (
-                  <TableRow hover role='checkbox' tabIndex={-1} key={index}>
-                    {columns.map(column => {
-                      const value =
-                        column.id === 'action' ? (
-                          <>
-                            <NotificationsActiveOutlinedIcon
-                              onClick={() =>
-                                navigate(`/tasks/${row.id}/reminder-task`)
-                              }
-                            />
-                            <EditOutlinedIcon
-                              style={{ padding: '0 20px' }}
-                              onClick={() =>
-                                navigate(`/tasks/${row.id}/edit-task`)
-                              }
-                            />
-                            <DeleteOutlineOutlinedIcon
-                              onClick={e => {
-                                handleOpen(row.id)
-                              }}
-                            />
-                            <Modal
-                              open={activeModal === row.id}
-                              onClose={() => setOpen(false)}>
-                              <DeleteModal>
-                                <div className='title'>
-                                  このタスクを削除してもよろしいですか?
-                                </div>
-                                <div className='footer'>
-                                  <Button>
-                                    <p onClick={() => handleClose()}>いいえ</p>
-                                  </Button>
-                                  <Button>
-                                    <p
-                                      onClick={() => {
-                                        handleDelete(row.id)
-                                        handleClose()
-                                      }}>
-                                      はい
-                                    </p>
-                                  </Button>
-                                </div>
-                              </DeleteModal>
-                            </Modal>
-                          </>
-                        ) : column.id === 'status' ? (
-                          handleStatusColor(row[column.id])
-                        ) : (
-                          row[column.id]
+            {data ? (
+              data
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => {
+                  return (
+                    <TableRow hover role='checkbox' tabIndex={-1} key={index}>
+                      {columns.map(column => {
+                        const value =
+                          column.id === 'action' ? (
+                            <>
+                              <NotificationsActiveOutlinedIcon
+                                onClick={() =>
+                                  navigate(`/tasks/${row.id}/reminder-task`)
+                                }
+                              />
+                              <EditOutlinedIcon
+                                style={{ padding: '0 20px' }}
+                                onClick={() =>
+                                  navigate(`/tasks/${row.id}/edit-task`)
+                                }
+                              />
+                              <DeleteOutlineOutlinedIcon
+                                onClick={e => {
+                                  handleOpen(row.id)
+                                }}
+                              />
+                              <Modal
+                                open={activeModal === row.id}
+                                onClose={() => setOpen(false)}
+                              >
+                                <DeleteModal>
+                                  <div className='title'>
+                                    このタスクを削除してもよろしいですか?
+                                  </div>
+                                  <div className='footer'>
+                                    <Button>
+                                      <p onClick={() => handleClose()}>
+                                        いいえ
+                                      </p>
+                                    </Button>
+                                    <Button>
+                                      <p
+                                        onClick={() => {
+                                          handleDelete(row.id)
+                                          handleClose()
+                                        }}
+                                      >
+                                        はい
+                                      </p>
+                                    </Button>
+                                  </div>
+                                </DeleteModal>
+                              </Modal>
+                            </>
+                          ) : column.id === 'status' ? (
+                            handleStatusColor(row[column.id])
+                          ) : (
+                            row[column.id]
+                          )
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.format && typeof value === 'number'
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
                         )
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      )
-                    })}
-                  </TableRow>
-                )
-              })}
+                      })}
+                    </TableRow>
+                  )
+                })
+            ) : (
+              <></>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
