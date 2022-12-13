@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  app:
+    image: app-prod
+    container_name: app-prod
+    # restart: unless-stopped
+    # working_dir: /app
+    # volumes: 
+      # - ./:/app
+    build:
+      context: ./
+      target: production
+      # dockerfile: Dockerfile
+    networks:
+      - travellist
+
+
+  # nginx:
+  #   image: nginx:1.17-alpine
+  #   container_name: nginx-prod
+  #   restart: unless-stopped
+  #   ports:
+  #     - 3000:80
+  #   volumes:
+  #     - ./build:/usr/share/nginx/html
+  #     - ./docker-compose/nginx:/etc/nginx/conf.d
+    # command: nginx -g daemon off
+networks:
+  travellist:
+    driver: bridge
