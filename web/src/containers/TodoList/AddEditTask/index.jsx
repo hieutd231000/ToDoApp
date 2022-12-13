@@ -13,6 +13,9 @@ const AddEditTask = () => {
   const [title, setTitle] = useState('')
   const [status, setStatus] = useState('')
 
+  const [titleError, setTitleError] = useState(false)
+  const [titleErrorText, setTitleErrorText] = useState('')
+
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
@@ -56,6 +59,19 @@ const AddEditTask = () => {
       .catch(error => console.log(error))
   }, [])
 
+  // handle Title
+  const handleTitle = e => {
+    setTitle(e.target.value)
+    if (e.target.value !== '') {
+      setTitleError(false)
+      setTitleErrorText('')
+      setTitle(e.target.value)
+    } else {
+      setTitleError(true)
+      setTitleErrorText('タイトル必須')
+    }
+  }
+
   // submit task
   const handleSubmit = e => {
     e.preventDefault()
@@ -90,8 +106,6 @@ const AddEditTask = () => {
     }
   }
 
-  console.log(status)
-
   return (
     <TodoLayout>
       <AddTaskStyle onSubmit={e => handleSubmit(e)}>
@@ -99,10 +113,13 @@ const AddEditTask = () => {
           <p>タスク</p>
           <TextField
             id='title'
-            // label='タスクを入力する'
+            error={titleError}
+            helperText={titleErrorText}
+            label='タスクを入力する'
             variant='outlined'
-            value={title}
-            onChange={e => setTitle(e.target.value)}
+            value={title ? title : ''}
+            onChange={e => handleTitle(e)}
+            required
           />
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -116,7 +133,8 @@ const AddEditTask = () => {
               id='status'
               value={status}
               label='スステータスを選択する'
-              onChange={e => setStatus(e.target.value)}>
+              onChange={e => setStatus(e.target.value)}
+              required>
               <MenuItem value={0}>対応しない</MenuItem>
               <MenuItem value={1}>未対応</MenuItem>
               <MenuItem value={2}>対応中</MenuItem>

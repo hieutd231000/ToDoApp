@@ -33,7 +33,7 @@ const Reminder = () => {
         if (data) {
           const splitData = data.split(' ')
           setDate(splitData[0])
-          setTime()
+          setTime(data)
         }
       })
       .catch(error => console.log(error))
@@ -76,7 +76,7 @@ const Reminder = () => {
               onChange={newValue => {
                 setDate(newValue)
               }}
-              renderInput={params => <TextField {...params} />}
+              renderInput={params => <TextField {...params} required />}
             />
           </LocalizationProvider>
         </Box>
@@ -89,7 +89,7 @@ const Reminder = () => {
               onChange={newValue => {
                 setTime(newValue)
               }}
-              renderInput={params => <TextField {...params} />}
+              renderInput={params => <TextField {...params} required />}
             />
           </LocalizationProvider>
         </Box>
