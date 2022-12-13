@@ -4,21 +4,17 @@ import { useState } from 'react'
 
 const Notification = () => {
   const [currentTime, setCurrentTime] = useState()
-  const setTime = '18:10:45'
+  const setTime = '22:04:50'
   useEffect(() => {
     const interval = setInterval(
-      () =>
-        setCurrentTime(
-          new Date().toLocaleTimeString('en-US', { hour12: false }),
-        ),
+      () => setCurrentTime(new Date().toLocaleTimeString([])),
       1000,
     )
     return () => clearInterval(interval)
   }, [])
 
-  if (currentTime == setTime) {
+  if (currentTime === setTime) {
     alert('Dậy đi ông cháu ơi!!!')
-    console.log('hee')
   }
 
   return <div>{currentTime}</div>

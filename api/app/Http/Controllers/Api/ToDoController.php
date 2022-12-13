@@ -206,7 +206,6 @@ class ToDoController extends Controller
             return $this->responseHelper->notFound("Not found");
         }
         $validator = Validator::make($request->all(), [
-            'begin' => 'date_format:Y-m-d H:i:s',
             'end' => 'date_format:Y-m-d H:i:s',
         ]);
         if ($validator->fails()) {

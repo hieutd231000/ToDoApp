@@ -115,7 +115,8 @@ const Countdown = () => {
                     onClick={() => {
                       setStop(true)
                       clearInterval(timerId.current)
-                    }}>
+                    }}
+                    disabled={countdown === 0 || !countdown}>
                     ストップ
                   </button>
                 )}

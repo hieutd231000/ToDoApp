@@ -7,6 +7,8 @@ import Box from '@mui/material/Box'
 
 import { HomeStyle } from '../../Home/index.style'
 import SignOut from '../../SignOut'
+import Music from '../../Music'
+import CountDown from '../../Countdown'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props
@@ -70,10 +72,10 @@ export default function TodoLayout({ children }) {
           {children}
         </TabPanel>
         <TabPanel className='TabPanel' value={value} index={1}>
-          音楽を聴く
+          <Music />
         </TabPanel>
         <TabPanel className='TabPanel' value={value} index={2}>
-          タイマー設定
+          <CountDown />
         </TabPanel>
       </HomeStyle>
     </>
