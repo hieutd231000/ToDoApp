@@ -4,7 +4,8 @@ import { useState } from 'react'
 
 const Notification = () => {
   const [currentTime, setCurrentTime] = useState()
-  const setTime = '22:04:50'
+  const setTime1 = '15:20:35'
+  const setTime2 = '09:12:40'
   useEffect(() => {
     const interval = setInterval(
       () => setCurrentTime(new Date().toLocaleTimeString([])),
@@ -13,7 +14,7 @@ const Notification = () => {
     return () => clearInterval(interval)
   }, [])
 
-  if (currentTime === setTime) {
+  if (currentTime === setTime1 || currentTime === setTime2) {
     alert('Dậy đi ông cháu ơi!!!')
   }
 

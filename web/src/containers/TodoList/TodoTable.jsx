@@ -100,8 +100,6 @@ const TodoTable = () => {
     }
   }
 
-  console.log(data)
-
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <Notification />

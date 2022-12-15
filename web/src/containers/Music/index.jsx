@@ -14,7 +14,7 @@ import { MusicStyle } from './index.style'
 import MusicCard from './MusicCard'
 
 const Music = () => {
-  const [musicType, setMusicType] = useState(0)
+  const [musicType, setMusicType] = useState()
   const [listMusic, setListMusic] = useState()
 
   const token = JSON.parse(localStorage.getItem('todoapp_token'))
@@ -26,15 +26,34 @@ const Music = () => {
     axios
       .get('http://127.0.0.1:8000/api/music', config)
       .then(res => {
-        console.log(res.data.data)
         setListMusic(res.data.data)
       })
       .catch(error => console.log(error))
   }, [])
 
+  const handleMusicType = musicType => {
+    switch (musicType) {
+      case 1:
+        return 'ポップス'
+      case 2:
+        return 'ロフィ'
+      case 3:
+        return 'EDM'
+      case 4:
+        return '他'
+      default:
+        return
+    }
+  }
+
   const handleChangeType = event => {
     setMusicType(event.target.value)
-    setListMusic(listMusic.filter(music => music.type === event.target.value))
+    console.log(listMusic)
+    const newList = listMusic.filter(
+      music => music.category === handleMusicType(event.target.value),
+    )
+    console.log(newList)
+    setListMusic(newList)
   }
 
   return (
@@ -48,7 +67,6 @@ const Music = () => {
               id='music'
               value={musicType}
               label='Music Type'
-              defaultValue=''
               onChange={handleChangeType}
             >
               <MenuItem value={1}>ポップス</MenuItem>
@@ -59,18 +77,18 @@ const Music = () => {
           </FormControl>
         </Box>
         <Button>
-          <p onClick={() => console.log('he')}>追加</p>
+          <p onClick={() => console.log('Add music')}>追加</p>
         </Button>
       </div>
-      {listMusic
-        ? listMusic.map(() => (
-            <Grid container spacing={2}>
-              <Grid item md={3} xs={4}>
+      <Grid container spacing={2}>
+        {listMusic
+          ? listMusic.map(index => (
+              <Grid item md={3} xs={4} key={index}>
                 <MusicCard />
               </Grid>
-            </Grid>
-          ))
-        : ''}
+            ))
+          : ''}
+      </Grid>
     </MusicStyle>
   )
 }
