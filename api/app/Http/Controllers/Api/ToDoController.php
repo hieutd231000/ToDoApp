@@ -39,6 +39,10 @@ class ToDoController extends Controller
                     $date = explode(' ',$value->created_at);
                     $value->created_at = $date[0];
                 }
+                if(isset($value->end)) {
+                    $date = explode(' ',$value->end);
+                    $value->end = $date[1];
+                }
             }
             return $this->responseHelper->success($data);
         } catch (\Exception $exception) {
