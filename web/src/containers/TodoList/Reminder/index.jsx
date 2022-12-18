@@ -39,16 +39,30 @@ const Reminder = () => {
       .catch(error => console.log(error))
   }, [])
 
+  console.log('date', date)
+  console.log('time', time)
+  const dateInfo = !date
+    ? 'hi'
+    : date.$y
+    ? `${date.$y}-${date.$M + 1 < 10 ? '0' + (date.$M + 1) : date.$M + 1}-${
+        date.$D < 10 ? '0' + date.$D : date.$D
+      }`
+    : date
+  const timeInfo = !time
+    ? 'hi'
+    : time.$H
+    ? `${time.$H < 10 ? '0' + time.$H : time.$H}:${
+        time.$m < 10 ? '0' + time.$m : time.$m
+      }:00`
+    : time.split(' ')[1]
+  console.log(time)
+  const bodyParameters = {
+    end: `${dateInfo} ${timeInfo}`,
+  }
+  console.log(bodyParameters)
   // Add new reminder
   const handleSubmit = e => {
     e.preventDefault()
-    const bodyParameters = {
-      end: `${date.$y}-${
-        date.$M + 1 < 10 ? '0' + (date.$M + 1) : date.$M + 1
-      }-${date.$D < 10 ? '0' + date.$D : date.$D} ${
-        time.$H < 10 ? '0' + time.$H : time.$H
-      }:${time.$m < 10 ? '0' + time.$m : time.$m}:00`,
-    }
     axios
       .post(
         `http://127.0.0.1:8000/api/reminder/${params.id}/update`,

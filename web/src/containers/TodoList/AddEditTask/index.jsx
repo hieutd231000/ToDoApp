@@ -132,9 +132,10 @@ const AddEditTask = () => {
               labelId='demo-simple-select-label'
               id='status'
               value={status}
-              label='スステータスを選択する'
+              label='ステータスを選択する'
               onChange={e => setStatus(e.target.value)}
-              required>
+              required
+            >
               <MenuItem value={0}>対応しない</MenuItem>
               <MenuItem value={1}>未対応</MenuItem>
               <MenuItem value={2}>対応中</MenuItem>

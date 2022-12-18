@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { StatusColor, DeleteModal } from './index.style'
+import { StatusColor, DeleteModalStyle } from './index.style'
 import Button from '../../components/Button'
-import Notification from './Notification'
 
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -17,7 +16,7 @@ import TableRow from '@mui/material/TableRow'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
-import { Box, Modal } from '@mui/material'
+import { Modal } from '@mui/material'
 
 const columns = [
   { id: 'task_name', label: 'タスク', minWidth: 300, align: 'center' },
@@ -32,6 +31,8 @@ const TodoTable = () => {
   const [activeModal, setActiveModal] = useState(null)
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
+
+  const [currentTime, setCurrentTime] = useState()
 
   const navigate = useNavigate()
 
@@ -60,6 +61,15 @@ const TodoTable = () => {
         setData(res.data.data)
       })
       .catch(error => console.log(error))
+  }, [])
+
+  // handleTime
+  useEffect(() => {
+    const interval = setInterval(
+      () => setCurrentTime(new Date().toLocaleTimeString([])),
+      1000,
+    )
+    return () => clearInterval(interval)
   }, [])
 
   //delete
@@ -102,7 +112,13 @@ const TodoTable = () => {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <Notification />
+      {data
+        ? data.forEach(task => {
+            if (currentTime === task.end) {
+              alert('Dậy đi ông cháu ơi!!!')
+            }
+          })
+        : ''}
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label='sticky table'>
           <TableHead>
@@ -149,7 +165,7 @@ const TodoTable = () => {
                                 open={activeModal === row.id}
                                 onClose={() => setOpen(false)}
                               >
-                                <DeleteModal>
+                                <DeleteModalStyle>
                                   <div className='title'>
                                     このタスクを削除してもよろしいですか?
                                   </div>
@@ -170,7 +186,7 @@ const TodoTable = () => {
                                       </p>
                                     </Button>
                                   </div>
-                                </DeleteModal>
+                                </DeleteModalStyle>
                               </Modal>
                             </>
                           ) : column.id === 'status' ? (
