@@ -35,7 +35,7 @@ export const StatusColor = styled('div')`
     border-radius: 4px;
     background-color: ${props => props.bgColor};
 `
-export const DeleteModal = styled(Box)`
+export const DeleteModalStyle = styled(Box)`
     position: absolute;
     padding: 50px;
     top: 50%;

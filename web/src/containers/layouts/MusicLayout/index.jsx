@@ -7,7 +7,7 @@ import Box from '@mui/material/Box'
 
 import { HomeStyle } from '../../Home/index.style'
 import SignOut from '../../SignOut'
-import Music from '../../Music'
+import TodoList from '../../TodoList'
 import CountDown from '../../Countdown'
 
 function TabPanel(props) {
@@ -43,8 +43,8 @@ function a11yProps(index) {
   }
 }
 
-export default function TodoLayout({ children }) {
-  const [value, setValue] = useState(0)
+export default function MusicLayout({ children }) {
+  const [value, setValue] = useState(1)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -72,10 +72,10 @@ export default function TodoLayout({ children }) {
           <Tab label='タイマー設定' {...a11yProps(2)} />
         </Tabs>
         <TabPanel className='TabPanel' value={value} index={0}>
-          {children}
+          <TodoList />
         </TabPanel>
         <TabPanel className='TabPanel' value={value} index={1}>
-          <Music />
+          {children}
         </TabPanel>
         <TabPanel className='TabPanel' value={value} index={2}>
           <CountDown />
