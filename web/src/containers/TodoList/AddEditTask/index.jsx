@@ -51,7 +51,7 @@ const AddEditTask = () => {
   // get current task
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/todo/${params.id}/getTask`, config)
+      .get(`${process.env.REACT_APP_BASE_URL}/todo/${params.id}/getTask`, config)
       .then(res => {
         setTitle(res.data.data.title)
         setStatus(convertStatus(res.data.data.status))
@@ -80,7 +80,7 @@ const AddEditTask = () => {
     if (params.id) {
       axios
         .post(
-          `http://127.0.0.1:8000/api/todo/${params.id}/update`,
+          `${process.env.REACT_APP_BASE_URL}/todo/${params.id}/update`,
           bodyParameters,
           config,
         )
@@ -94,7 +94,7 @@ const AddEditTask = () => {
         })
     } else {
       axios
-        .post('http://127.0.0.1:8000/api/todo/add', bodyParameters, config)
+        .post('${process.env.REACT_APP_BASE_URL}/todo/add', bodyParameters, config)
         .then(res => {
           setLoading(false)
           navigate('/home')

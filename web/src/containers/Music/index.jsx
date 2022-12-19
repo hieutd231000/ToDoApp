@@ -39,7 +39,7 @@ const Music = () => {
 
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:8000/api/music', config)
+      .get(`${process.env.REACT_APP_BASE_URL}/music`, config)
       .then(res => {
         setListMusic(res.data.data)
         setFilterMusic(res.data.data)
@@ -81,7 +81,7 @@ const Music = () => {
     setFilterMusic(filterMusic.filter(elm => elm.id != id))
     axios
       .post(
-        `http://127.0.0.1:8000/api/music/${id}/delete`,
+        `${process.env.REACT_APP_BASE_URL}/music/${id}/delete`,
         bodyParameters,
         config,
       )
@@ -130,7 +130,7 @@ const Music = () => {
               <Grid item md={3} xs={4} key={music.id}>
                 <div className='MusicCard'>
                   <div className='MusicCard__Header'>
-                    <EditOutlinedIcon />
+                    <EditOutlinedIcon onClick={() => navigate(`/music/${music.id}/edit-music`)}/>
                     <DeleteOutlineOutlinedIcon
                       onClick={e => {
                         handleOpen(music.id)

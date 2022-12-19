@@ -20,7 +20,7 @@ const SignOut = () => {
   const handleLogout = e => {
     e.preventDefault()
     axios
-      .post('http://127.0.0.1:8000/api/logout', bodyParameters, config)
+      .post(`${process.env.REACT_APP_BASE_URL}/logout`, bodyParameters, config)
       .then(response => {
         localStorage.removeItem('todoapp_token')
         navigate('/sign-in')

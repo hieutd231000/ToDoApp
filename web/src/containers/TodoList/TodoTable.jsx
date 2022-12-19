@@ -56,7 +56,7 @@ const TodoTable = () => {
 
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:8000/api/todo', config)
+      .get(`${process.env.REACT_APP_BASE_URL}/todo`, config)
       .then(res => {
         setData(res.data.data)
       })
@@ -76,7 +76,7 @@ const TodoTable = () => {
   const handleDelete = id => {
     setData(data.filter(elm => elm.id !== id))
     axios.post(
-      `http://127.0.0.1:8000/api/todo/${id}/delete`,
+      `${process.env.REACT_APP_BASE_URL}/todo/${id}/delete`,
       bodyParameters,
       config,
     )

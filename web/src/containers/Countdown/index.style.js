@@ -21,6 +21,14 @@ export const CountdownStyle = styled('div')`
             transform: translateY(-2px);
         }
     }
+    .cancel {
+        border: 2px solid red;
+        box-shadow: inset 0px 0px 0px 0px red, inset 0px 0px 0px 0px #EE2C49;
+        &:hover {
+            background-color: red;
+            box-shadow: inset 6px 5px 27px 22px red, inset 1px 0px 0px 0px red, rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+    }
 
     .BtnStop {
         color: white;
