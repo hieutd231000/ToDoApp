@@ -11,6 +11,6 @@
 ## Run
 `docker-compose up -d`
 
-`php artisan migrate`
+`docker-compose exec app php artisan migrate`
 
 GET: localhost:8000/api/test
