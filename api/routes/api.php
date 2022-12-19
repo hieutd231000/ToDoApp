@@ -33,6 +33,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::group(["prefix" => "music"], function () {
         Route::get("/", [\App\Http\Controllers\Api\MusicController::class, 'index']);
+        Route::get("/getMusic", [\App\Http\Controllers\Api\MusicController::class, 'getMusicById']);
         Route::post("/add", [\App\Http\Controllers\Api\MusicController::class, 'add']);
         Route::post("/{id}/update", [\App\Http\Controllers\Api\MusicController::class, 'update']);
         Route::post("/{id}/delete", [\App\Http\Controllers\Api\MusicController::class, 'delete']);
