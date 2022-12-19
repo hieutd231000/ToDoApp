@@ -14,7 +14,7 @@ import AddEditMusic from '../containers/Music/AddEditMusic'
 export const router = createBrowserRouter([
   {
     path: '*',
-    element: <NotFoundPage />,
+    element: <SignInPage />,
   },
   {
     path: '/sign-in',
