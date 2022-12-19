@@ -120,4 +120,29 @@ class MusicController extends Controller
             return $this->responseHelper->error();
         }
     }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \App\Helpers\JsonResponse|void
+     */
+    public function getMusicById(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return $this->responseHelper->validation($validator->errors());
+        }
+        try {
+            $music = $this->musicRepository->find($request["id"]);
+            if(empty($music) || $music->user_id != Auth::id()) {
+                return $this->responseHelper->notFound("Not found");
+            }
+            return $this->responseHelper->success($music);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return $this->responseHelper->error();
+        }
+
+    }
 }
