@@ -27,7 +27,7 @@ const Reminder = () => {
   // get current task
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/reminder/${params.id}`, config)
+      .get(`${process.env.REACT_APP_BASE_URL}/reminder/${params.id}`, config)
       .then(res => {
         const data = res.data.data.end
         if (data) {
@@ -65,7 +65,7 @@ const Reminder = () => {
     e.preventDefault()
     axios
       .post(
-        `http://127.0.0.1:8000/api/reminder/${params.id}/update`,
+        `${process.env.REACT_APP_BASE_URL}/reminder/${params.id}/update`,
         bodyParameters,
         config,
       )

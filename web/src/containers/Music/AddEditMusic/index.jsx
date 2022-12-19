@@ -7,7 +7,7 @@ import {
   TextField,
 } from '@mui/material'
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Button from '../../../components/Button'
 import MusicLayout from '../../layouts/MusicLayout'
@@ -84,6 +84,19 @@ const AddEditMusic = () => {
     }
   }
 
+    // get current task
+    useEffect(() => {
+      axios
+        .get(`${process.env.REACT_APP_BASE_URL}/music/getMusic?id=${params.id}`, config, params.id)
+        .then(res => {
+          setMusicUrl(res.data.data.link)
+          setMusicType(res.data.data.category_id)
+          setMusicName(res.data.data.name)
+        })
+        .catch(error => console.log(error))
+    }, [])
+  
+
   // submit task
   const handleSubmit = e => {
     e.preventDefault()
@@ -91,7 +104,7 @@ const AddEditMusic = () => {
     if (params.id) {
       axios
         .post(
-          `http://127.0.0.1:8000/api/music/${params.id}/update`,
+          `${process.env.REACT_APP_BASE_URL}/music/${params.id}/update`,
           bodyParameters,
           config,
         )
@@ -105,7 +118,7 @@ const AddEditMusic = () => {
         })
     } else {
       axios
-        .post('http://127.0.0.1:8000/api/music/add', bodyParameters, config)
+        .post(`${process.env.REACT_APP_BASE_URL}/music/add`, bodyParameters, config)
         .then(res => {
           setLoading(false)
           navigate('/home')
