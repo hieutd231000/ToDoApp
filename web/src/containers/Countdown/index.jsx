@@ -105,7 +105,7 @@ const Countdown = () => {
             <div className='Time'>
               <h1>{countdown ? formatTime(countdown) : '00:00:00'}</h1>
               <div className='footer'>
-                <button onClick={() => setCountdown(0)}>キャンセル</button>
+                <button className='cancel' onClick={() => setCountdown(0)}>キャンセル</button>
                 {stop ? (
                   <button onClick={() => handleStop()} className='BtnStop'>
                     続く

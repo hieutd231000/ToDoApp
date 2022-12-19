@@ -88,7 +88,7 @@ const SignUp = () => {
   const handleSubmit = e => {
     e.preventDefault()
     if (emailError || passError || confirmError) return false
-    axios.post('http://127.0.0.1:8000/api/signup', data).then(res => {
+    axios.post(`${process.env.REACT_APP_BASE_URL}/signup`, data).then(res => {
       console.log(res)
       console.log(res.data)
     })
