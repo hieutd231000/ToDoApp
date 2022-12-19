@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
@@ -9,9 +9,17 @@ import TodoList from '../TodoList'
 import { HomeStyle } from './index.style'
 import Countdown from '../Countdown'
 import Music from '../Music'
+import { useNavigate } from 'react-router-dom'
 
 function TabPanel(props) {
+  const navigate = useNavigate()
   const { children, value, index, ...other } = props
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem('todoapp_token'))
+    if(!token) {
+      navigate('/sign-in')
+    }
+  })
 
   return (
     <div

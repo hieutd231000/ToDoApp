@@ -94,7 +94,7 @@ const AddEditTask = () => {
         })
     } else {
       axios
-        .post('${process.env.REACT_APP_BASE_URL}/todo/add', bodyParameters, config)
+        .post(`${process.env.REACT_APP_BASE_URL}/todo/add`, bodyParameters, config)
         .then(res => {
           setLoading(false)
           navigate('/home')

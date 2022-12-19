@@ -121,6 +121,7 @@ const AddEditMusic = () => {
         .post(`${process.env.REACT_APP_BASE_URL}/music/add`, bodyParameters, config)
         .then(res => {
           setLoading(false)
+          console.log('add done')
           navigate('/home')
         })
         .catch(err => {
