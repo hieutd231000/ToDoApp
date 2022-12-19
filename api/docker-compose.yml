@@ -7,7 +7,7 @@ services:
         uid: 1000
       context: ./
       dockerfile: Dockerfile
-    image: travellist
+    image: maihoangminhbk/api-app
     container_name: travellist-app
     restart: unless-stopped
     working_dir: /var/www/
