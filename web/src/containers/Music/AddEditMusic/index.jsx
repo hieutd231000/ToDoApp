@@ -100,7 +100,6 @@ const AddEditMusic = () => {
   // submit task
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(bodyParameters)
     if (params.id) {
       axios
         .post(
@@ -110,7 +109,7 @@ const AddEditMusic = () => {
         )
         .then(res => {
           setLoading(false)
-          navigate('/home')
+          navigate('/home2')
         })
         .catch(err => {
           setLoading(false)
@@ -121,8 +120,7 @@ const AddEditMusic = () => {
         .post(`${process.env.REACT_APP_BASE_URL}/music/add`, bodyParameters, config)
         .then(res => {
           setLoading(false)
-          console.log('add done')
-          navigate('/home')
+          navigate('/home2')
         })
         .catch(err => {
           setLoading(false)
@@ -185,7 +183,7 @@ const AddEditMusic = () => {
         <div className='Footer'>
           <Button type='submit'>保存</Button>
           <Button>
-            <p onClick={() => navigate('/home')}>キャンセル</p>
+            <p onClick={() => navigate('/home2')}>キャンセル</p>
           </Button>
         </div>
         {loading ? <Loading /> : ''}

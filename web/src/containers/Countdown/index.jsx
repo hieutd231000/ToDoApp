@@ -42,7 +42,6 @@ const Countdown = () => {
   }, [countdown])
 
   const handleAdd = () => {
-    console.log(hour, minute, second)
     setCountdown(Number(hour) * 3600 + Number(minute) * 60 + Number(second))
     setOpenAdd(false)
   }

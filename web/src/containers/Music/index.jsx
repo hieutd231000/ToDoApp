@@ -41,7 +41,6 @@ const Music = () => {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/music`, config)
       .then(res => {
-        console.log(res)
         setListMusic(res.data.data)
         setFilterMusic(res.data.data)
       })
@@ -99,8 +98,6 @@ const Music = () => {
   const handleOpen = index => {
     setActiveModal(index)
   }
-
-  console.log(listMusic)
 
   return (
     <MusicStyle>

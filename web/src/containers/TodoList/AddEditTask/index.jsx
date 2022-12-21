@@ -76,7 +76,6 @@ const AddEditTask = () => {
   const handleSubmit = e => {
     e.preventDefault()
     setLoading(true)
-    console.log(bodyParameters)
     if (params.id) {
       axios
         .post(

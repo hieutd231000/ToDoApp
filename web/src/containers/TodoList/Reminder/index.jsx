@@ -39,8 +39,6 @@ const Reminder = () => {
       .catch(error => console.log(error))
   }, [])
 
-  console.log('date', date)
-  console.log('time', time)
   const dateInfo = !date
     ? 'hi'
     : date.$y
@@ -55,11 +53,10 @@ const Reminder = () => {
         time.$m < 10 ? '0' + time.$m : time.$m
       }:00`
     : time.split(' ')[1]
-  console.log(time)
   const bodyParameters = {
     end: `${dateInfo} ${timeInfo}`,
   }
-  console.log(bodyParameters)
+
   // Add new reminder
   const handleSubmit = e => {
     e.preventDefault()
@@ -76,6 +73,7 @@ const Reminder = () => {
         console.log(error)
       })
   }
+
 
   return (
     <TodoLayout>
