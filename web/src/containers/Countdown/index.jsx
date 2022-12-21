@@ -54,6 +54,12 @@ const Countdown = () => {
     }, 1000)
   }
 
+  const handleCancel = () => {
+    setCountdown(0)
+    setHour(0)
+    setMinute(0)
+    setSecond(0)
+  }
   return (
     <CountdownStyle>
       {openAdd ? (
@@ -105,7 +111,7 @@ const Countdown = () => {
             <div className='Time'>
               <h1>{countdown ? formatTime(countdown) : '00:00:00'}</h1>
               <div className='footer'>
-                <button className='cancel' onClick={() => setCountdown(0)}>キャンセル</button>
+                <button className='cancel' onClick={() => handleCancel()}>キャンセル</button>
                 {stop ? (
                   <button onClick={() => handleStop()} className='BtnStop'>
                     続く
