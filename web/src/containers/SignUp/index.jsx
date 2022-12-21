@@ -90,7 +90,6 @@ const SignUp = () => {
     if (emailError || passError || confirmError) return false
     axios.post(`${process.env.REACT_APP_BASE_URL}/signup`, data).then(res => {
       console.log(res)
-      console.log(res.data)
     })
     navigate('/sign-in')
   }

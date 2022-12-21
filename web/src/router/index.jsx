@@ -1,11 +1,11 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
-import NotFoundPage from '../pages/NotFoundPage'
 import SignInPage from '../pages/SignInPage'
 import SignUpPage from '../pages/SignUpPage'
 
 import HomePage from '../pages/HomePage'
+import HomePage2 from '../pages/HomePage2'
 import AddEditTask from '../containers/TodoList/AddEditTask'
 import Reminder from '../containers/TodoList/Reminder'
 import Countdown from '../containers/Countdown'
@@ -27,6 +27,10 @@ export const router = createBrowserRouter([
   {
     path: '/home',
     element: <HomePage />,
+  },
+  {
+    path: '/home2',
+    element: <HomePage2 />,
   },
   {
     path: '/tasks/add-task',
