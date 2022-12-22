@@ -5,7 +5,6 @@ import { Box } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import EmailIcon from '@mui/icons-material/Email'
 import LockPersonIcon from '@mui/icons-material/LockPerson'
-import Button from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
@@ -119,7 +118,7 @@ const SignIn = () => {
           ''
         )}
         <div className='Bottom'>
-          <Button type='submit'>ログインする</Button>
+          <button type='submit' disabled={emailError || passError}>ログインする</button>
           <p onClick={() => navigate('/sign-up')}>サインアップ</p>
         </div>
         {loading ? <Loading /> : ''}

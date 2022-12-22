@@ -45,9 +45,9 @@ const AddEditMusic = () => {
   const convertStatus = status => {
     var num = -1
     switch (status) {
-      case 'ポップス':
-        return (num = 1)
       case 'ロフィ':
+        return (num = 1)
+      case 'ポップス':
         return (num = 2)
       case 'EDM':
         return (num = 3)
@@ -129,6 +129,8 @@ const AddEditMusic = () => {
     }
   }
 
+console.log(musicType)
+
   return (
     <MusicLayout>
       <AddMusicStyle onSubmit={e => handleSubmit(e)}>
@@ -159,8 +161,8 @@ const AddEditMusic = () => {
               onChange={e => setMusicType(e.target.value)}
               required
             >
-              <MenuItem value={1}>ポップス</MenuItem>
-              <MenuItem value={2}>ロフィ</MenuItem>
+              <MenuItem value={1}>ロフィ</MenuItem>
+              <MenuItem value={2}>ポップス</MenuItem>
               <MenuItem value={3}>EDM</MenuItem>
               <MenuItem value={4}>ほかの</MenuItem>
             </Select>
