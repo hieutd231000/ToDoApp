@@ -11,7 +11,7 @@ services:
     build:
       context: ./
       target: production
-      # dockerfile: Dockerfile
+      dockerfile: Dockerfile
     networks:
       - travellist
 
