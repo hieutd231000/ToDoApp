@@ -52,9 +52,9 @@ const Music = () => {
       case 0:
         return '全部'
       case 1:
-        return 'ポップス'
-      case 2:
         return 'ロフィ'
+      case 2:
+        return 'ポップス'
       case 3:
         return 'EDM'
       case 4:
@@ -65,6 +65,7 @@ const Music = () => {
   }
 
   const handleChangeType = event => {
+    console.log(event.target.value)
     if (event.target.value === 0) {
       setFilterMusic(listMusic)
     } else {
@@ -99,6 +100,7 @@ const Music = () => {
     setActiveModal(index)
   }
 
+  console.log(filterMusic)
   return (
     <MusicStyle>
       <div className='Header'>
@@ -112,8 +114,8 @@ const Music = () => {
               label='Music Type'
               onChange={handleChangeType}
             >
-              <MenuItem value={1}>ポップス</MenuItem>
-              <MenuItem value={2}>ロフィ</MenuItem>
+              <MenuItem value={1}>ロフィ</MenuItem>
+              <MenuItem value={2}>ポップス</MenuItem>
               <MenuItem value={3}>EDM</MenuItem>
               <MenuItem value={4}>ほかの</MenuItem>
               <MenuItem value={0}>全部</MenuItem>
@@ -146,6 +148,7 @@ const Music = () => {
                   </div>
                   <div className='MusicCard__Footer'>
                     <p>{music.name}</p>
+                    <p style={{ color: '#ccc' }}>{music.category}</p>
                   </div>
                 </div>
                 <Modal
