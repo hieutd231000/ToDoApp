@@ -98,6 +98,7 @@ const Reminder = () => {
             <TimePicker
               label='時間を選択する'
               value={time}
+              ampm={false}
               onChange={newValue => {
                 setTime(newValue)
               }}
