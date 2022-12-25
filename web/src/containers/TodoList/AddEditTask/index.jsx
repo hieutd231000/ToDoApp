@@ -51,7 +51,10 @@ const AddEditTask = () => {
   // get current task
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/todo/${params.id}/getTask`, config)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/todo/${params.id}/getTask`,
+        config,
+      )
       .then(res => {
         setTitle(res.data.data.title)
         setStatus(convertStatus(res.data.data.status))
@@ -68,7 +71,7 @@ const AddEditTask = () => {
       setTitle(e.target.value)
     } else {
       setTitleError(true)
-      setTitleErrorText('タイトル必須')
+      setTitleErrorText('Yêu cầu nhập công việc !')
     }
   }
 
@@ -93,7 +96,11 @@ const AddEditTask = () => {
         })
     } else {
       axios
-        .post(`${process.env.REACT_APP_BASE_URL}/todo/add`, bodyParameters, config)
+        .post(
+          `${process.env.REACT_APP_BASE_URL}/todo/add`,
+          bodyParameters,
+          config,
+        )
         .then(res => {
           setLoading(false)
           navigate('/home')
@@ -109,12 +116,12 @@ const AddEditTask = () => {
     <TodoLayout>
       <AddTaskStyle onSubmit={e => handleSubmit(e)}>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <p>タスク</p>
+          <p>Công việc</p>
           <TextField
             id='title'
             error={titleError}
             helperText={titleErrorText}
-            label='タスクを入力する'
+            label='Nhập công việc'
             variant='outlined'
             value={title ? title : ''}
             onChange={e => handleTitle(e)}
@@ -122,31 +129,30 @@ const AddEditTask = () => {
           />
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <p>ステータス</p>
+          <p>Trạng thái</p>
           <FormControl fullWidth>
             <InputLabel id='demo-simple-select-label'>
-              ステータスを選択する
+              Lựa chọn trạng thái
             </InputLabel>
             <Select
               labelId='demo-simple-select-label'
               id='status'
               value={status}
-              label='ステータスを選択する'
+              label='Lựa chọn trạng thái'
               onChange={e => setStatus(e.target.value)}
-              required
-            >
-              <MenuItem value={0}>対応しない</MenuItem>
-              <MenuItem value={1}>未対応</MenuItem>
-              <MenuItem value={2}>対応中</MenuItem>
-              <MenuItem value={3}>完了</MenuItem>
+              required>
+              <MenuItem value={0}>Không hoàn thành</MenuItem>
+              <MenuItem value={1}>Quá hạn</MenuItem>
+              <MenuItem value={2}>Đang thực hiện</MenuItem>
+              <MenuItem value={3}>Hoàn thành</MenuItem>
             </Select>
           </FormControl>
         </Box>
 
         <div className='Footer'>
-          <Button type='submit'>保存</Button>
+          <Button type='submit'>Lưu</Button>
           <Button>
-            <p onClick={() => navigate('/home')}>キャンセル</p>
+            <p onClick={() => navigate('/home')}>Thoát</p>
           </Button>
         </div>
         {loading ? <Loading /> : ''}

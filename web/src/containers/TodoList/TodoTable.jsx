@@ -19,10 +19,10 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import { Modal } from '@mui/material'
 
 const columns = [
-  { id: 'task_name', label: 'タスク', minWidth: 300, align: 'center' },
-  { id: 'created_at', label: '作成期間', minWidth: 150, align: 'center' },
-  { id: 'status', label: 'ステータス', minWidth: 150, align: 'center' },
-  { id: 'action', label: '操作', minWidth: 200, align: 'center' },
+  { id: 'task_name', label: 'Công việc', minWidth: 300, align: 'center' },
+  { id: 'created_at', label: 'Thời gian tạo', minWidth: 150, align: 'center' },
+  { id: 'status', label: 'Trạng thái', minWidth: 150, align: 'center' },
+  { id: 'action', label: 'Hành động', minWidth: 200, align: 'center' },
 ]
 
 const TodoTable = () => {
@@ -127,8 +127,7 @@ const TodoTable = () => {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
+                  style={{ minWidth: column.minWidth }}>
                   {column.label}
                 </TableCell>
               ))}
@@ -163,26 +162,22 @@ const TodoTable = () => {
                               />
                               <Modal
                                 open={activeModal === row.id}
-                                onClose={() => setOpen(false)}
-                              >
+                                onClose={() => setOpen(false)}>
                                 <DeleteModalStyle>
                                   <div className='title'>
-                                    このタスクを削除してもよろしいですか?
+                                    Bạn có chắc muốn xóa công việc này chứ ?
                                   </div>
                                   <div className='footer'>
                                     <Button>
-                                      <p onClick={() => handleClose()}>
-                                        いいえ
-                                      </p>
+                                      <p onClick={() => handleClose()}>Không</p>
                                     </Button>
                                     <Button>
                                       <p
                                         onClick={() => {
                                           handleDelete(row.id)
                                           handleClose()
-                                        }}
-                                      >
-                                        はい
+                                        }}>
+                                        Đồng ý
                                       </p>
                                     </Button>
                                   </div>

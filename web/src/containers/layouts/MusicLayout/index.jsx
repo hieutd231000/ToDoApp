@@ -19,8 +19,7 @@ function TabPanel(props) {
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
+      {...other}>
       {value === index && (
         <Box sx={{ p: 3 }}>
           <Typography component={'span'}>{children}</Typography>
@@ -57,19 +56,17 @@ export default function MusicLayout({ children }) {
         sx={{
           flexGrow: 1,
           display: 'flex',
-        }}
-      >
+        }}>
         <Tabs
           orientation='vertical'
           variant='scrollable'
           value={value}
           onChange={handleChange}
           aria-label='Vertical tabs example'
-          sx={{ borderRight: 1, borderColor: 'divider' }}
-        >
-          <Tab label='Todoリスト' {...a11yProps(0)} />
-          <Tab label='音楽を聴く' {...a11yProps(1)} />
-          <Tab label='タイマー設定' {...a11yProps(2)} />
+          sx={{ borderRight: 1, borderColor: 'divider' }}>
+          <Tab label='Danh sách công việc' {...a11yProps(0)} />
+          <Tab label='Nghe nhạc' {...a11yProps(1)} />
+          <Tab label='Countdown' {...a11yProps(2)} />
         </Tabs>
         <TabPanel className='TabPanel' value={value} index={0}>
           <TodoList />

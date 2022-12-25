@@ -74,16 +74,15 @@ const Reminder = () => {
       })
   }
 
-
   return (
     <TodoLayout>
       <ReminderStyle onSubmit={e => handleSubmit(e)}>
-        <div className='title'>リマインダー</div>
+        <div className='title'>Nhắc nhở</div>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <p>日付</p>
+          <p>Ngày</p>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              label='日付を選択する'
+              label='Chọn ngày'
               value={date}
               onChange={newValue => {
                 setDate(newValue)
@@ -94,9 +93,9 @@ const Reminder = () => {
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <p>時間</p>
+            <p>Giờ</p>
             <TimePicker
-              label='時間を選択する'
+              label='Chọn giờ'
               value={time}
               ampm={false}
               onChange={newValue => {
@@ -108,9 +107,9 @@ const Reminder = () => {
         </Box>
 
         <div className='Footer'>
-          <Button type='submit'>保存</Button>
+          <Button type='submit'>Lưu</Button>
           <Button>
-            <span onClick={() => navigate('/home')}>キャンセル</span>
+            <span onClick={() => navigate('/home')}>Thoát</span>
           </Button>
         </div>
       </ReminderStyle>

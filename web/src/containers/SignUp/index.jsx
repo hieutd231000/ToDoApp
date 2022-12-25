@@ -31,12 +31,12 @@ const SignUp = () => {
   const handleEmail = e => {
     if (!e.target.value) {
       setEmailError(true)
-      setEmailErrorText('メールアドレス必須')
+      setEmailErrorText('Yêu cầu nhập địa chỉ email!')
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(e.target.value)
     ) {
       setEmailError(true)
-      setEmailErrorText('無効な電子メールアドレス')
+      setEmailErrorText('Địa chỉ email không hợp lệ!')
     } else {
       setEmailError(false)
       setEmailErrorText(false)
@@ -47,13 +47,13 @@ const SignUp = () => {
   const handlePassword = e => {
     if (!e.target.value) {
       setPassError(true)
-      setPassErrorText('パスワード必須')
+      setPassErrorText('Yêu cầu nhập mật khẩu!')
     } else if (e.target.value !== '' && e.target.value.length < 6) {
       setPassError(true)
-      setPassErrorText('6 文字以上')
+      setPassErrorText('Mật khẩu tối thiểu cần 6 ký tự!')
     } else if (confirm && e.target.value !== '' && e.target.value !== confirm) {
       setConfirmError(true)
-      setConfirmErrorText('確認 パスワードが一致しません!')
+      setConfirmErrorText('Xác nhận mật khẩu không chính xác!')
     } else {
       setPassError(false)
       setPassErrorText('')
@@ -67,10 +67,10 @@ const SignUp = () => {
   const handleConfirmPassword = e => {
     if (!e.target.value) {
       setConfirmError(true)
-      setConfirmErrorText('Confirm Password is required')
+      setConfirmErrorText('Yêu cầu xác nhận mật khẩu!')
     } else if (e.target.value !== '' && e.target.value !== password) {
       setConfirmError(true)
-      setConfirmErrorText('Confirm Password is not match!')
+      setConfirmErrorText('Xác nhận mật khẩu không chính xác!')
     } else {
       setConfirmError(false)
       setConfirmErrorText('')
@@ -103,7 +103,7 @@ const SignUp = () => {
           />
           <TextField
             id='username'
-            label='名前'
+            label='Tên'
             variant='standard'
             value={username}
             onChange={e => setUsername(e.target.value)}
@@ -117,7 +117,7 @@ const SignUp = () => {
           <TextField
             error={emailError}
             id='email'
-            label='メール'
+            label='Email'
             variant='standard'
             helperText={emailErrorText}
             onChange={e => handleEmail(e)}
@@ -130,7 +130,7 @@ const SignUp = () => {
           />
           <TextField
             id='password'
-            label='パスワード'
+            label='Mật khẩu'
             type='password'
             variant='standard'
             error={passError}
@@ -145,7 +145,7 @@ const SignUp = () => {
           />
           <TextField
             id='confirm-password'
-            label='確認パスワード'
+            label='Xác nhận mật khẩu'
             type='password'
             variant='standard'
             error={confirmError}
@@ -155,8 +155,8 @@ const SignUp = () => {
           />
         </Box>
         <div className='Bottom'>
-          <Button type='submit'>サインアップ</Button>
-          <p onClick={() => navigate('/sign-in')}>ログインする</p>
+          <Button type='submit'>Đăng ký</Button>
+          <p onClick={() => navigate('/sign-in')}>Đăng nhập</p>
         </div>
       </SignUpStyle>
     </LogInLayout>
