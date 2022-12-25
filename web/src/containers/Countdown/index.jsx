@@ -69,7 +69,7 @@ const Countdown = () => {
               type='number'
               min='0'
               max='100'
-              label='Hour'
+              label='Giờ'
               variant='outlined'
               onChange={e => setHour(e.target.value)}
             />
@@ -79,7 +79,7 @@ const Countdown = () => {
               type='number'
               min='0'
               max='59'
-              label='Minute'
+              label='Phút'
               variant='outlined'
               onChange={e => setMinute(e.target.value)}
             />
@@ -89,31 +89,33 @@ const Countdown = () => {
               type='number'
               min='0'
               max='59'
-              label='Second'
+              label='Giây'
               variant='outlined'
               onChange={e => setSecond(e.target.value)}
             />
             <p>S</p>
           </div>
           <div className='footer'>
-            <button onClick={() => setOpenAdd(false)}>キャンセル</button>
-            <button onClick={() => handleAdd()}>保存</button>
+            <button onClick={() => setOpenAdd(false)}>Thoát</button>
+            <button onClick={() => handleAdd()}>Lưu</button>
           </div>
         </Box>
       ) : (
         <>
           <button className='Add' onClick={() => setOpenAdd(true)}>
-            設定
+            Cài đặt
           </button>
           <div className='Content'>
-            <h2>カウントダウン</h2>
+            <h2>Countdown</h2>
             <div className='Time'>
               <h1>{countdown ? formatTime(countdown) : '00:00:00'}</h1>
               <div className='footer'>
-                <button className='cancel' onClick={() => handleCancel()}>キャンセル</button>
+                <button className='cancel' onClick={() => handleCancel()}>
+                  Thoát
+                </button>
                 {stop ? (
                   <button onClick={() => handleStop()} className='BtnStop'>
-                    続く
+                    Tiếp tục
                   </button>
                 ) : (
                   <button
@@ -122,7 +124,7 @@ const Countdown = () => {
                       clearInterval(timerId.current)
                     }}
                     disabled={countdown === 0 || !countdown}>
-                    ストップ
+                    Bắt đầu
                   </button>
                 )}
               </div>

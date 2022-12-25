@@ -31,7 +31,7 @@ const SignOut = () => {
   return (
     <SignOutStyle>
       <div className='Bottom'>
-        <p onClick={e => handleLogout(e)}>サインアウト</p>
+        <p onClick={e => handleLogout(e)}>Đăng xuất</p>
       </div>
     </SignOutStyle>
   )

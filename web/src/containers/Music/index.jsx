@@ -111,19 +111,18 @@ const Music = () => {
               labelId='music-type-label'
               id='music'
               defaultValue={0}
-              label='Music Type'
-              onChange={handleChangeType}
-            >
-              <MenuItem value={1}>ロフィ</MenuItem>
-              <MenuItem value={2}>ポップス</MenuItem>
+              label='Thể loại nhạc'
+              onChange={handleChangeType}>
+              <MenuItem value={1}>Lofi</MenuItem>
+              <MenuItem value={2}>Pop</MenuItem>
               <MenuItem value={3}>EDM</MenuItem>
-              <MenuItem value={4}>ほかの</MenuItem>
-              <MenuItem value={0}>全部</MenuItem>
+              <MenuItem value={4}>Khác</MenuItem>
+              <MenuItem value={0}>Toàn bộ</MenuItem>
             </Select>
           </FormControl>
         </Box>
         <Button>
-          <p onClick={() => navigate('/music/add-music')}>追加</p>
+          <p onClick={() => navigate('/music/add-music')}>Thêm bài hát mới</p>
         </Button>
       </div>
       <Grid container spacing={2}>
@@ -132,7 +131,9 @@ const Music = () => {
               <Grid item md={3} xs={4} key={music.id}>
                 <div className='MusicCard'>
                   <div className='MusicCard__Header'>
-                    <EditOutlinedIcon onClick={() => navigate(`/music/${music.id}/edit-music`)}/>
+                    <EditOutlinedIcon
+                      onClick={() => navigate(`/music/${music.id}/edit-music`)}
+                    />
                     <DeleteOutlineOutlinedIcon
                       onClick={e => {
                         handleOpen(music.id)
@@ -153,24 +154,22 @@ const Music = () => {
                 </div>
                 <Modal
                   open={activeModal === music.id}
-                  onClose={() => setOpen(false)}
-                >
+                  onClose={() => setOpen(false)}>
                   <DeleteModalStyle>
                     <div className='title'>
-                      このタスクを削除してもよろしいですか?
+                      Bạn có chắc muốn xóa bài hát này chứ ?
                     </div>
                     <div className='footer'>
                       <Button>
-                        <p onClick={() => handleClose()}>いいえ</p>
+                        <p onClick={() => handleClose()}>Không</p>
                       </Button>
                       <Button>
                         <p
                           onClick={() => {
                             handleDelete(music.id)
                             handleClose()
-                          }}
-                        >
-                          はい
+                          }}>
+                          Đồng ý
                         </p>
                       </Button>
                     </div>

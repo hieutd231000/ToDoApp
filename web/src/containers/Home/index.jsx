@@ -16,7 +16,7 @@ function TabPanel(props) {
   const { children, value, index, ...other } = props
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('todoapp_token'))
-    if(!token) {
+    if (!token) {
       navigate('/sign-in')
     }
   })
@@ -70,9 +70,9 @@ export default function Home() {
         onChange={handleChange}
         aria-label='Vertical tabs example'
         sx={{ borderRight: 1, borderColor: 'divider' }}>
-        <Tab label='Todoリスト' {...a11yProps(0)} />
-        <Tab label='音楽を聴く' {...a11yProps(1)} />
-        <Tab label='タイマー設定' {...a11yProps(2)} />
+        <Tab label='Danh sách công việc' {...a11yProps(0)} />
+        <Tab label='Nghe nhạc' {...a11yProps(1)} />
+        <Tab label='Countdown' {...a11yProps(2)} />
       </Tabs>
       <TabPanel className='TabPanel' value={value} index={0}>
         <TodoList />

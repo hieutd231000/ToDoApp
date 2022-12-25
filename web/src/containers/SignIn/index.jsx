@@ -28,12 +28,12 @@ const SignIn = () => {
   const handleEmail = e => {
     if (!e.target.value) {
       setEmailError(true)
-      setEmailErrorText('メールアドレス必須')
+      setEmailErrorText('Yêu cầu nhập email!')
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(e.target.value)
     ) {
       setEmailError(true)
-      setEmailErrorText('無効な電子メールアドレス')
+      setEmailErrorText('Địa chỉ email không hợp lệ!')
     } else {
       setEmailError(false)
       setEmailErrorText('')
@@ -45,10 +45,10 @@ const SignIn = () => {
     setLoginFail(false)
     if (!e.target.value) {
       setPassError(true)
-      setPassErrorText('パスワード必須')
+      setPassErrorText('Yêu cầu nhập mật khẩu!')
     } else if (e.target.value !== '' && e.target.value.length < 6) {
       setPassError(true)
-      setPassErrorText('6 文字以上')
+      setPassErrorText('Mật khẩu tối thiểu cần 6 ký tự!')
     } else {
       setPassError(false)
       setPassErrorText('')
@@ -87,7 +87,7 @@ const SignIn = () => {
           <TextField
             error={emailError}
             id='email'
-            label='メール'
+            label='Email'
             variant='standard'
             helperText={emailErrorText}
             onChange={e => handleEmail(e)}
@@ -100,7 +100,7 @@ const SignIn = () => {
           />
           <TextField
             id='password'
-            label='パスワード'
+            label='Mật khẩu'
             type='password'
             variant='standard'
             error={passError}
@@ -112,14 +112,16 @@ const SignIn = () => {
 
         {loginFail ? (
           <span className='LogInFail'>
-            メールアドレスまたはパスワードが正しくない
+            Tài khoản hoặc mật khẩu không chính xác!
           </span>
         ) : (
           ''
         )}
         <div className='Bottom'>
-          <button type='submit' disabled={emailError || passError}>ログインする</button>
-          <p onClick={() => navigate('/sign-up')}>サインアップ</p>
+          <button type='submit' disabled={emailError || passError}>
+            Đăng nhập
+          </button>
+          <p onClick={() => navigate('/sign-up')}>Đăng ký</p>
         </div>
         {loading ? <Loading /> : ''}
       </SignInStyle>

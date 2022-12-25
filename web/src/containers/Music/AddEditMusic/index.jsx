@@ -67,7 +67,7 @@ const AddEditMusic = () => {
       setMusicUrl(e.target.value)
     } else {
       setUrlError(true)
-      setUrlErrorText('URL必須')
+      setUrlErrorText('Yêu cầu nhập đường dẫn bài hát!')
     }
   }
 
@@ -80,22 +80,25 @@ const AddEditMusic = () => {
       setMusicName(e.target.value)
     } else {
       setNameError(true)
-      setNameErrorText('音楽名必須')
+      setNameErrorText('Yêu cầu nhập tên bài hát!')
     }
   }
 
-    // get current task
-    useEffect(() => {
-      axios
-        .get(`${process.env.REACT_APP_BASE_URL}/music/getMusic?id=${params.id}`, config, params.id)
-        .then(res => {
-          setMusicUrl(res.data.data.link)
-          setMusicType(res.data.data.category_id)
-          setMusicName(res.data.data.name)
-        })
-        .catch(error => console.log(error))
-    }, [])
-  
+  // get current task
+  useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/music/getMusic?id=${params.id}`,
+        config,
+        params.id,
+      )
+      .then(res => {
+        setMusicUrl(res.data.data.link)
+        setMusicType(res.data.data.category_id)
+        setMusicName(res.data.data.name)
+      })
+      .catch(error => console.log(error))
+  }, [])
 
   // submit task
   const handleSubmit = e => {
@@ -117,7 +120,11 @@ const AddEditMusic = () => {
         })
     } else {
       axios
-        .post(`${process.env.REACT_APP_BASE_URL}/music/add`, bodyParameters, config)
+        .post(
+          `${process.env.REACT_APP_BASE_URL}/music/add`,
+          bodyParameters,
+          config,
+        )
         .then(res => {
           setLoading(false)
           navigate('/home2')
@@ -129,7 +136,7 @@ const AddEditMusic = () => {
     }
   }
 
-console.log(musicType)
+  console.log(musicType)
 
   return (
     <MusicLayout>
@@ -140,7 +147,7 @@ console.log(musicType)
             id='url'
             error={urlError}
             helperText={urlErrorText}
-            label='URLを入力する'
+            label='Nhập đường dẫn'
             variant='outlined'
             value={musicUrl ? musicUrl : ''}
             onChange={e => handleUrl(e)}
@@ -148,33 +155,30 @@ console.log(musicType)
           />
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <p>タイプ</p>
+          <p>Thể loại</p>
           <FormControl fullWidth>
-            <InputLabel id='demo-simple-select-label'>
-              タイプを選択する
-            </InputLabel>
+            <InputLabel id='demo-simple-select-label'>Chọn thể loại</InputLabel>
             <Select
               labelId='demo-simple-select-label'
               id='type'
               value={musicType}
-              label='タイプを選択する'
+              label='Lựa chọn thể loại'
               onChange={e => setMusicType(e.target.value)}
-              required
-            >
-              <MenuItem value={1}>ロフィ</MenuItem>
-              <MenuItem value={2}>ポップス</MenuItem>
+              required>
+              <MenuItem value={1}>Lofi</MenuItem>
+              <MenuItem value={2}>Pop</MenuItem>
               <MenuItem value={3}>EDM</MenuItem>
-              <MenuItem value={4}>ほかの</MenuItem>
+              <MenuItem value={4}>Khác</MenuItem>
             </Select>
           </FormControl>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <p>音楽名</p>
+          <p>Tên bài hát</p>
           <TextField
             id='name'
             error={nameError}
             helperText={nameErrorText}
-            label='音楽名を入力する'
+            label='Nhập tên bài hát'
             variant='outlined'
             value={musicName ? musicName : ''}
             onChange={e => handleName(e)}
@@ -183,9 +187,9 @@ console.log(musicType)
         </Box>
 
         <div className='Footer'>
-          <Button type='submit'>保存</Button>
+          <Button type='submit'>Lưu</Button>
           <Button>
-            <p onClick={() => navigate('/home2')}>キャンセル</p>
+            <p onClick={() => navigate('/home2')}>Thoát</p>
           </Button>
         </div>
         {loading ? <Loading /> : ''}
