@@ -1,64 +1,64 @@
-import React, { useState } from 'react'
-import { useRef } from 'react'
-import { useEffect } from 'react'
-import { CountdownStyle } from './index.style'
+import React, { useState } from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
+import { CountdownStyle } from "./index.style";
 
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 const formatTime = time => {
-  let hours = Math.floor(time / 3600)
-  let minutes = Math.floor((time - hours * 3600) / 60)
-  let seconds = Math.floor(time - hours * 3600 - minutes * 60)
+  let hours = Math.floor(time / 3600);
+  let minutes = Math.floor((time - hours * 3600) / 60);
+  let seconds = Math.floor(time - hours * 3600 - minutes * 60);
 
-  if (hours < 10) hours = '0' + hours
-  if (minutes < 10) minutes = '0' + minutes
-  if (seconds < 10) seconds = '0' + seconds
-  return `${hours}:${minutes}:${seconds}`
-}
+  if (hours < 10) hours = "0" + hours;
+  if (minutes < 10) minutes = "0" + minutes;
+  if (seconds < 10) seconds = "0" + seconds;
+  return `${hours}:${minutes}:${seconds}`;
+};
 
 const Countdown = () => {
-  const [countdown, setCountdown] = useState()
-  const [openAdd, setOpenAdd] = useState(false)
-  const [hour, setHour] = useState(0)
-  const [minute, setMinute] = useState(0)
-  const [second, setSecond] = useState(0)
-  const timerId = useRef()
+  const [countdown, setCountdown] = useState();
+  const [openAdd, setOpenAdd] = useState(false);
+  const [hour, setHour] = useState(0);
+  const [minute, setMinute] = useState(0);
+  const [second, setSecond] = useState(0);
+  const timerId = useRef();
 
-  const [stop, setStop] = useState(false)
+  const [stop, setStop] = useState(false);
 
   useEffect(() => {
     timerId.current = setInterval(() => {
-      setCountdown(prev => prev - 1)
-    }, 1000)
-    return () => clearInterval(timerId.current)
-  }, [])
+      setCountdown(prev => prev - 1);
+    }, 1000);
+    return () => clearInterval(timerId.current);
+  }, []);
 
   useEffect(() => {
     if (countdown <= 0) {
-      clearInterval(timerId.current)
-      alert('END')
+      clearInterval(timerId.current);
+      alert("END");
     }
-  }, [countdown])
+  }, [countdown]);
 
   const handleAdd = () => {
-    setCountdown(Number(hour) * 3600 + Number(minute) * 60 + Number(second))
-    setOpenAdd(false)
-  }
+    setCountdown(Number(hour) * 3600 + Number(minute) * 60 + Number(second));
+    setOpenAdd(false);
+  };
 
   const handleStop = () => {
-    setStop(false)
+    setStop(false);
     timerId.current = setInterval(() => {
-      setCountdown(prev => prev - 1)
-    }, 1000)
-  }
+      setCountdown(prev => prev - 1);
+    }, 1000);
+  };
 
   const handleCancel = () => {
-    setCountdown(0)
-    setHour(0)
-    setMinute(0)
-    setSecond(0)
-  }
+    setCountdown(0);
+    setHour(0);
+    setMinute(0);
+    setSecond(0);
+  };
   return (
     <CountdownStyle>
       {openAdd ? (
@@ -108,7 +108,7 @@ const Countdown = () => {
           <div className='Content'>
             <h2>Countdown</h2>
             <div className='Time'>
-              <h1>{countdown ? formatTime(countdown) : '00:00:00'}</h1>
+              <h1>{countdown ? formatTime(countdown) : "00:00:00"}</h1>
               <div className='footer'>
                 <button className='cancel' onClick={() => handleCancel()}>
                   Thoát
@@ -120,8 +120,8 @@ const Countdown = () => {
                 ) : (
                   <button
                     onClick={() => {
-                      setStop(true)
-                      clearInterval(timerId.current)
+                      setStop(true);
+                      clearInterval(timerId.current);
                     }}
                     disabled={countdown === 0 || !countdown}>
                     Bắt đầu
@@ -133,7 +133,7 @@ const Countdown = () => {
         </>
       )}
     </CountdownStyle>
-  )
-}
+  );
+};
 
-export default Countdown
+export default Countdown;

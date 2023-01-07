@@ -1,52 +1,55 @@
-import React, { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import TextField from '@mui/material/TextField'
-import Button from '../../../components/Button'
-import TodoLayout from '../../layouts/TodoLayout'
-import { AddTaskStyle } from './index.style'
-import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
-import axios from 'axios'
-import Loading from '../../../components/Loading'
-import { useEffect } from 'react'
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import Button from "../../../components/Button";
+import TodoLayout from "../../layouts/TodoLayout";
+import { AddTaskStyle } from "./index.style";
+import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import axios from "axios";
+import Loading from "../../../components/Loading";
+import { useEffect } from "react";
+import SuccessNotification from "../../../components/SuccessNotification";
 
 const AddEditTask = () => {
-  const [title, setTitle] = useState('')
-  const [status, setStatus] = useState('')
+  const [title, setTitle] = useState("");
+  const [status, setStatus] = useState("");
 
-  const [titleError, setTitleError] = useState(false)
-  const [titleErrorText, setTitleErrorText] = useState('')
+  const [titleError, setTitleError] = useState(false);
+  const [titleErrorText, setTitleErrorText] = useState("");
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [addSuccess, setAddSuccess] = useState(false);
+  const [editSuccess, setEditSuccess] = useState(false);
 
-  const navigate = useNavigate()
-  const params = useParams()
+  const navigate = useNavigate();
+  const params = useParams();
 
-  const token = JSON.parse(localStorage.getItem('todoapp_token'))
+  const token = JSON.parse(localStorage.getItem("todoapp_token"));
   const config = {
     headers: { Authorization: `Bearer ${token}` },
-  }
+  };
 
   const bodyParameters = {
     title,
     status,
-  }
+  };
 
   // convert string status to number
   const convertStatus = status => {
-    var num = -1
+    var num = -1;
     switch (status) {
-      case '対応しない':
-        return (num = 0)
-      case '未対応':
-        return (num = 1)
-      case '対応中':
-        return (num = 2)
-      case '完了':
-        return (num = 3)
+      case "対応しない":
+        return (num = 0);
+      case "未対応":
+        return (num = 1);
+      case "対応中":
+        return (num = 2);
+      case "完了":
+        return (num = 3);
       default:
-        return num
+        return num;
     }
-  }
+  };
 
   // get current task
   useEffect(() => {
@@ -56,29 +59,29 @@ const AddEditTask = () => {
         config,
       )
       .then(res => {
-        setTitle(res.data.data.title)
-        setStatus(convertStatus(res.data.data.status))
+        setTitle(res.data.data.title);
+        setStatus(convertStatus(res.data.data.status));
       })
-      .catch(error => console.log(error))
-  }, [])
+      .catch(error => console.log(error));
+  }, []);
 
   // handle Title
   const handleTitle = e => {
-    setTitle(e.target.value)
-    if (e.target.value !== '') {
-      setTitleError(false)
-      setTitleErrorText('')
-      setTitle(e.target.value)
+    setTitle(e.target.value);
+    if (e.target.value !== "") {
+      setTitleError(false);
+      setTitleErrorText("");
+      setTitle(e.target.value);
     } else {
-      setTitleError(true)
-      setTitleErrorText('Yêu cầu nhập công việc !')
+      setTitleError(true);
+      setTitleErrorText("Yêu cầu nhập công việc !");
     }
-  }
+  };
 
   // submit task
   const handleSubmit = e => {
-    e.preventDefault()
-    setLoading(true)
+    e.preventDefault();
+    setLoading(true);
     if (params.id) {
       axios
         .post(
@@ -87,13 +90,16 @@ const AddEditTask = () => {
           config,
         )
         .then(res => {
-          setLoading(false)
-          navigate('/home')
+          setLoading(false);
+          setEditSuccess(true);
+          setTimeout(() => {
+            navigate("/home");
+          }, 1300);
         })
         .catch(err => {
-          setLoading(false)
-          console.log(err)
-        })
+          setLoading(false);
+          console.log(err);
+        });
     } else {
       axios
         .post(
@@ -102,20 +108,23 @@ const AddEditTask = () => {
           config,
         )
         .then(res => {
-          setLoading(false)
-          navigate('/home')
+          setLoading(false);
+          setAddSuccess(true);
+          setTimeout(() => {
+            navigate("/home");
+          }, 1300);
         })
         .catch(err => {
-          setLoading(false)
-          console.log(err)
-        })
+          setLoading(false);
+          console.log(err);
+        });
     }
-  }
+  };
 
   return (
     <TodoLayout>
       <AddTaskStyle onSubmit={e => handleSubmit(e)}>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
           <p>Công việc</p>
           <TextField
             id='title'
@@ -123,12 +132,12 @@ const AddEditTask = () => {
             helperText={titleErrorText}
             label='Nhập công việc'
             variant='outlined'
-            value={title ? title : ''}
+            value={title ? title : ""}
             onChange={e => handleTitle(e)}
             required
           />
         </Box>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
           <p>Trạng thái</p>
           <FormControl fullWidth>
             <InputLabel id='demo-simple-select-label'>
@@ -152,13 +161,29 @@ const AddEditTask = () => {
         <div className='Footer'>
           <Button type='submit'>Lưu</Button>
           <Button>
-            <p onClick={() => navigate('/home')}>Thoát</p>
+            <p onClick={() => navigate("/home")}>Thoát</p>
           </Button>
         </div>
-        {loading ? <Loading /> : ''}
+        {loading ? <Loading /> : ""}
+        {addSuccess ? (
+          <SuccessNotification
+            isOpen={addSuccess}
+            textSuccess='Thêm nhiệm vụ thành công!'
+          />
+        ) : (
+          ""
+        )}
+        {editSuccess ? (
+          <SuccessNotification
+            isOpen={editSuccess}
+            textSuccess='Chỉnh sửa nhiệm vụ thành công!'
+          />
+        ) : (
+          ""
+        )}
       </AddTaskStyle>
     </TodoLayout>
-  )
-}
+  );
+};
 
-export default AddEditTask
+export default AddEditTask;
