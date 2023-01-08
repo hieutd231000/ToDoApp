@@ -16,7 +16,7 @@ import TableRow from "@mui/material/TableRow";
 import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { Box, Modal, Typography } from "@mui/material";
+import { Modal } from "@mui/material";
 
 const columns = [
   { id: "task_name", label: "Công việc", minWidth: 300, align: "center" },
@@ -27,11 +27,11 @@ const columns = [
 
 const style = {
   position: "absolute",
-  top: "50%",
+  top: "40%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  backgroundColor: "#ccc",
+  backgroundColor: "#f44336",
   border: "2px solid #ccc",
   boxShadow: 24,
   p: 4,
@@ -39,7 +39,9 @@ const style = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "20px",
+  padding: "50px 32px",
+  fontSize: "28px",
+  color: "white",
 };
 
 const TodoTable = () => {
@@ -50,7 +52,6 @@ const TodoTable = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [currentTime, setCurrentTime] = useState();
   const [reminderOpen, setReminderOpen] = useState(false);
-  const handleReminderClose = () => setReminderOpen(false);
 
   const navigate = useNavigate();
 
@@ -128,17 +129,27 @@ const TodoTable = () => {
     }
   };
 
+  // handle reminder notification
+  useEffect(() => {
+    if (data) {
+      data.forEach(task => {
+        if (currentTime === task.end) {
+          setReminderOpen(true);
+          console.log("open");
+          setTimeout(() => {
+            setReminderOpen(false);
+          }, 3000);
+        }
+      });
+    }
+  }, [currentTime]);
+
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      {data
-        ? data.forEach(task => {
-            if (currentTime === task.end) {
-              setReminderOpen(true);
-            }
-          })
-        : ""}
-      <div className='ReminderModal' style={{ backgroundColor: "red" }}>
-        <div style={style}>hello</div>
+      <div
+        className='ReminderModal'
+        style={{ display: reminderOpen ? "block" : "none" }}>
+        <div style={style}>Đến giờ rồi bạn ơi !!!</div>
       </div>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label='sticky table'>
