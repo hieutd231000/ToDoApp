@@ -6,6 +6,25 @@ import { CountdownStyle } from "./index.style";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
+const style = {
+  position: "absolute",
+  top: "40%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  backgroundColor: "#f44336",
+  border: "2px solid #ccc",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: "8px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "50px 32px",
+  fontSize: "28px",
+  color: "white",
+};
+
 const formatTime = time => {
   let hours = Math.floor(time / 3600);
   let minutes = Math.floor((time - hours * 3600) / 60);
@@ -25,6 +44,8 @@ const Countdown = () => {
   const [second, setSecond] = useState(0);
   const timerId = useRef();
 
+  const [reminderOpen, setReminderOpen] = useState(false);
+
   const [stop, setStop] = useState(false);
 
   useEffect(() => {
@@ -37,7 +58,10 @@ const Countdown = () => {
   useEffect(() => {
     if (countdown <= 0) {
       clearInterval(timerId.current);
-      alert("END");
+      setReminderOpen(true);
+      setTimeout(() => {
+        setReminderOpen(false);
+      }, 3000);
     }
   }, [countdown]);
 
@@ -105,6 +129,11 @@ const Countdown = () => {
           <button className='Add' onClick={() => setOpenAdd(true)}>
             Cài đặt
           </button>
+          <div
+            className='ReminderModal'
+            style={{ display: reminderOpen ? "block" : "none" }}>
+            <div style={style}>Hết giờ rồi bạn ơi !!!</div>
+          </div>
           <div className='Content'>
             <h2>Countdown</h2>
             <div className='Time'>
