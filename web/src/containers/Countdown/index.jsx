@@ -5,6 +5,7 @@ import { CountdownStyle } from "./index.style";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 
 const style = {
   position: "absolute",
@@ -126,13 +127,16 @@ const Countdown = () => {
         </Box>
       ) : (
         <>
-          <button className='Add' onClick={() => setOpenAdd(true)}>
-            Cài đặt
-          </button>
           <div
             className='ReminderModal'
             style={{ display: reminderOpen ? "block" : "none" }}>
             <div style={style}>Hết giờ rồi bạn ơi !!!</div>
+          </div>
+          <div className='Right'>
+            <TipsAndUpdatesIcon />
+            <button className='Add' onClick={() => setOpenAdd(true)}>
+              Cài đặt
+            </button>
           </div>
           <div className='Content'>
             <h2>Countdown</h2>

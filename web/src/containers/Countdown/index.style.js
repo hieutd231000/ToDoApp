@@ -36,8 +36,15 @@ export const CountdownStyle = styled('div')`
         box-shadow: inset 6px 5px 27px 22px #085997, inset 1px 0px 0px 0px #085997, rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
 
-    .Add {
+    .Right {
         float: right;
+        display: flex;
+        align-items: center;
+        .MuiSvgIcon-root {
+            cursor: pointer;
+            font-size: 40px;
+            margin-right: 40px;
+        }
     }
     .Content {
         display: flex;

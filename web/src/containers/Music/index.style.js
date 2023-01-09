@@ -7,6 +7,15 @@ export const MusicStyle= styled('div')`
         justify-content: space-between;
         align-items: center;
         margin-bottom: 30px;
+        .Right {
+            display: flex;
+            align-items: center;
+            .MuiSvgIcon-root {
+                cursor: pointer;
+                font-size: 40px;
+                margin-right: 40px;
+            }
+        }
     }
 
     .MuiGrid-root {
