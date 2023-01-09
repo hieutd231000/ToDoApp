@@ -113,17 +113,17 @@ const TodoTable = () => {
   const handleStatusColor = status => {
     switch (status) {
       case "対応しない":
-        return <StatusColor bgColor='blue'>{status}</StatusColor>;
+        return <StatusColor bgColor='blue'>Không hoàn thành</StatusColor>;
       case "未対応":
-        return <StatusColor bgColor='red'>{status}</StatusColor>;
+        return <StatusColor bgColor='red'>Quá hạn</StatusColor>;
       case "対応中":
         return (
           <StatusColor bgColor='yellow' color='black'>
-            {status}
+            Đang thực hiện
           </StatusColor>
         );
       case "完了":
-        return <StatusColor bgColor='green'>{status}</StatusColor>;
+        return <StatusColor bgColor='green'>Đã hoàn thành</StatusColor>;
       default:
         break;
     }

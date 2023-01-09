@@ -5,81 +5,99 @@ import {
   InputLabel,
   MenuItem,
   Select,
-} from '@mui/material'
-import React, { useEffect } from 'react'
-import { useState } from 'react'
-import axios from 'axios'
-import Button from '../../components/Button'
-import { MusicStyle } from './index.style'
-import { Modal } from '@mui/material'
-import YouTube from 'react-youtube'
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
+} from "@mui/material";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
+import Button from "../../components/Button";
+import { MusicStyle } from "./index.style";
+import { Modal } from "@mui/material";
+import YouTube from "react-youtube";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 
-import { DeleteModalStyle } from '../TodoList/index.style'
-import { useNavigate } from 'react-router-dom'
+import { DeleteModalStyle } from "../TodoList/index.style";
+import { useNavigate } from "react-router-dom";
 
 const Music = () => {
-  const [musicType, setMusicType] = useState()
-  const [listMusic, setListMusic] = useState()
-  const [filterMusic, setFilterMusic] = useState()
+  const [musicType, setMusicType] = useState();
+  const [listMusic, setListMusic] = useState();
+  const [filterMusic, setFilterMusic] = useState();
 
-  const [open, setOpen] = useState(false)
-  const [activeModal, setActiveModal] = useState(null)
+  const [open, setOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const token = JSON.parse(localStorage.getItem('todoapp_token'))
+  const token = JSON.parse(localStorage.getItem("todoapp_token"));
   const config = {
     headers: { Authorization: `Bearer ${token}` },
-  }
+  };
   const bodyParameters = {
-    key: 'value',
-  }
+    key: "value",
+  };
 
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/music`, config)
       .then(res => {
-        setListMusic(res.data.data)
-        setFilterMusic(res.data.data)
+        setListMusic(res.data.data);
+        setFilterMusic(res.data.data);
       })
-      .catch(error => console.log(error))
-  }, [])
+      .catch(error => console.log(error));
+  }, []);
 
   const handleMusicType = musicType => {
     switch (musicType) {
       case 0:
-        return '全部'
+        return "全部";
       case 1:
-        return 'ロフィ'
+        return "ロフィ";
       case 2:
-        return 'ポップス'
+        return "ポップス";
       case 3:
-        return 'EDM'
+        return "EDM";
       case 4:
-        return 'ほかの'
+        return "ほかの";
       default:
-        return
+        return;
     }
-  }
+  };
+
+  const handleMusicTypeToVN = musicType => {
+    switch (musicType) {
+      case "全部":
+        return "Toàn bộ";
+      case "ロフィ":
+        return "Lofi";
+      case "ポップス":
+        return "Pop";
+      case "EDM":
+        return "EDM";
+      case "ほかの":
+        return "Khác";
+      default:
+        return;
+    }
+  };
 
   const handleChangeType = event => {
-    console.log(event.target.value)
+    console.log(event.target.value);
     if (event.target.value === 0) {
-      setFilterMusic(listMusic)
+      setFilterMusic(listMusic);
     } else {
       const newList = listMusic.filter(
         music => music.category === handleMusicType(event.target.value),
-      )
-      setFilterMusic(newList)
+      );
+      setFilterMusic(newList);
     }
-  }
+  };
 
   // handle delete
   const handleDelete = id => {
-    setListMusic(listMusic.filter(elm => elm.id != id))
-    setFilterMusic(filterMusic.filter(elm => elm.id != id))
+    setListMusic(listMusic.filter(elm => elm.id != id));
+    setFilterMusic(filterMusic.filter(elm => elm.id != id));
     axios
       .post(
         `${process.env.REACT_APP_BASE_URL}/music/${id}/delete`,
@@ -87,20 +105,20 @@ const Music = () => {
         config,
       )
       .then(res => {
-        console.log(res)
+        console.log(res);
       })
-      .catch(error => console.log(error))
-  }
+      .catch(error => console.log(error));
+  };
 
   const handleClose = () => {
-    setOpen(false)
-    setActiveModal(null)
-  }
+    setOpen(false);
+    setActiveModal(null);
+  };
   const handleOpen = index => {
-    setActiveModal(index)
-  }
+    setActiveModal(index);
+  };
 
-  console.log(filterMusic)
+  console.log(filterMusic);
   return (
     <MusicStyle>
       <div className='Header'>
@@ -121,9 +139,12 @@ const Music = () => {
             </Select>
           </FormControl>
         </Box>
-        <Button>
-          <p onClick={() => navigate('/music/add-music')}>Thêm bài hát mới</p>
-        </Button>
+        <div className='Right'>
+          <TipsAndUpdatesIcon />
+          <Button>
+            <p onClick={() => navigate("/music/add-music")}>Thêm bài hát mới</p>
+          </Button>
+        </div>
       </div>
       <Grid container spacing={2}>
         {filterMusic
@@ -136,20 +157,22 @@ const Music = () => {
                     />
                     <DeleteOutlineOutlinedIcon
                       onClick={e => {
-                        handleOpen(music.id)
+                        handleOpen(music.id);
                       }}
                     />
                   </div>
                   <div className='MusicCard__Content'>
                     <YouTube
-                      videoId={music.link.split('=')[1]}
+                      videoId={music.link.split("=")[1]}
                       sandbox='allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation allow-presentation'
                       onReady={e => e.target.pauseVideo()}
                     />
                   </div>
                   <div className='MusicCard__Footer'>
                     <p>{music.name}</p>
-                    <p style={{ color: '#ccc' }}>{music.category}</p>
+                    <p style={{ color: "#ccc" }}>
+                      {handleMusicTypeToVN(music.category)}
+                    </p>
                   </div>
                 </div>
                 <Modal
@@ -166,8 +189,8 @@ const Music = () => {
                       <Button>
                         <p
                           onClick={() => {
-                            handleDelete(music.id)
-                            handleClose()
+                            handleDelete(music.id);
+                            handleClose();
                           }}>
                           Đồng ý
                         </p>
@@ -177,10 +200,10 @@ const Music = () => {
                 </Modal>
               </Grid>
             ))
-          : ''}
+          : ""}
       </Grid>
     </MusicStyle>
-  )
-}
+  );
+};
 
-export default Music
+export default Music;
