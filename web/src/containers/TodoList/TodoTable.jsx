@@ -17,13 +17,7 @@ import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsAc
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { Modal } from "@mui/material";
-
-const columns = [
-  { id: "task_name", label: "Công việc", minWidth: 300, align: "center" },
-  { id: "created_at", label: "Thời gian tạo", minWidth: 150, align: "center" },
-  { id: "status", label: "Trạng thái", minWidth: 150, align: "center" },
-  { id: "action", label: "Hành động", minWidth: 200, align: "center" },
-];
+import Checkbox from "@mui/material/Checkbox";
 
 const style = {
   position: "absolute",
@@ -52,6 +46,9 @@ const TodoTable = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [currentTime, setCurrentTime] = useState();
   const [reminderOpen, setReminderOpen] = useState(false);
+  const [listDelete, setListDelete] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isOpenDeleteMany, setIsOpenDeleteMany] = useState(false);
 
   const navigate = useNavigate();
 
@@ -62,6 +59,14 @@ const TodoTable = () => {
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  // handle open delete many task modal
+  const handleOpenDeleteMany = () => {
+    setIsOpenDeleteMany(true);
+  };
+  const handleCloseDeleteMany = () => {
+    setIsOpenDeleteMany(false);
   };
 
   // get data
@@ -81,6 +86,55 @@ const TodoTable = () => {
       })
       .catch(error => console.log(error));
   }, []);
+
+  // columns
+  const columns = [
+    { id: "task_name", label: "Công việc", minWidth: 250, align: "center" },
+    {
+      id: "created_at",
+      label: "Thời gian tạo",
+      minWidth: 200,
+      align: "center",
+    },
+    { id: "status", label: "Trạng thái", minWidth: 150, align: "center" },
+    { id: "action", label: "Hành động", minWidth: 250, align: "center" },
+    {
+      id: "checkbox",
+      label: listDelete.length ? (
+        <>
+          <DeleteOutlineOutlinedIcon
+            style={{ fontSize: "40px", color: "red" }}
+            onClick={() => handleOpenDeleteMany()}
+          />
+          <Modal open={isOpenDeleteMany} onClose={() => setOpen(false)}>
+            <DeleteModalStyle>
+              <div className='title'>
+                Bạn có chắc muốn xóa danh sách các công việc này chứ ?
+              </div>
+              <div className='footer'>
+                <Button>
+                  <p onClick={() => handleCloseDeleteMany()}>Không</p>
+                </Button>
+                <Button>
+                  <p
+                    onClick={() => {
+                      handleDeleteManyTask(listDelete);
+                      handleCloseDeleteMany();
+                    }}>
+                    Đồng ý
+                  </p>
+                </Button>
+              </div>
+            </DeleteModalStyle>
+          </Modal>
+        </>
+      ) : (
+        ""
+      ),
+      minWidth: 50,
+      align: "start",
+    },
+  ];
 
   // handleTime
   useEffect(() => {
@@ -143,6 +197,34 @@ const TodoTable = () => {
       });
     }
   }, [currentTime]);
+
+  // handle delete many task
+  const handleListDelete = id => {
+    if (!listDelete.includes(id)) {
+      setListDelete([...listDelete, id]);
+    } else {
+      listDelete.splice(listDelete.indexOf(id), 1);
+      setListDelete([...listDelete]);
+    }
+    setIsChecked(true);
+  };
+  const handleDeleteManyTask = ids => {
+    setData(data.filter(elm => !ids.includes(elm.id)));
+    setListDelete([]);
+    listDelete.map(id => {
+      axios.post(
+        `${process.env.REACT_APP_BASE_URL}/todo/${id}/delete`,
+        bodyParameters,
+        config,
+      );
+    });
+  };
+
+  // format date
+  const formatDate = str => {
+    const arr = str.split("-");
+    return `${arr[2]}/${arr[1]}/${arr[0]}`;
+  };
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -218,6 +300,15 @@ const TodoTable = () => {
                             </>
                           ) : column.id === "status" ? (
                             handleStatusColor(row[column.id])
+                          ) : column.id === "checkbox" ? (
+                            <Checkbox
+                              checked={
+                                listDelete.includes(row.id) ? isChecked : false
+                              }
+                              onClick={() => handleListDelete(row.id)}
+                            />
+                          ) : column.id === "created_at" ? (
+                            formatDate(row[column.id])
                           ) : (
                             row[column.id]
                           );
