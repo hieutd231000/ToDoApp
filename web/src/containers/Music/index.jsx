@@ -19,16 +19,49 @@ import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 
 import { DeleteModalStyle } from "../TodoList/index.style";
 import { useNavigate } from "react-router-dom";
+import Tour from "reactour";
+
+const MusicTourConfig = [
+  {
+    selector: '[data-tut="list-music"]',
+    content: "Đây là danh sách các bài hát",
+  },
+  {
+    selector: '[data-tut="add-music"]',
+    content: "Ta có thể thêm bài hát mới",
+  },
+  {
+    selector: '[data-tut="delete-music"]',
+    content: "Xóa bài hát",
+  },
+  {
+    selector: '[data-tut="edit-music"]',
+    content: "Sửa bài hát",
+  },
+  {
+    selector: '[data-tut="filter-music"]',
+    content: "Lọc danh sách bài hát theo thể loại",
+  },
+];
 
 const Music = () => {
   const [musicType, setMusicType] = useState();
   const [listMusic, setListMusic] = useState();
   const [filterMusic, setFilterMusic] = useState();
+  const [isTourOpen, setIsTourOpen] = useState(false);
 
   const [open, setOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
 
   const navigate = useNavigate();
+
+  const closeTour = () => {
+    setIsTourOpen(false);
+  };
+
+  const openTour = () => {
+    setIsTourOpen(true);
+  };
 
   const token = JSON.parse(localStorage.getItem("todoapp_token"));
   const config = {
@@ -121,7 +154,7 @@ const Music = () => {
   return (
     <MusicStyle>
       <div className='Header'>
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{ minWidth: 120 }} data-tut='filter-music'>
           <FormControl fullWidth>
             <InputLabel id='music-type-label'>Thể loại nhạc</InputLabel>
             <Select
@@ -139,22 +172,35 @@ const Music = () => {
           </FormControl>
         </Box>
         <div className='Right'>
-          <TipsAndUpdatesIcon />
+          <TipsAndUpdatesIcon onClick={() => openTour()} />
           <Button>
-            <p onClick={() => navigate("/music/add-music")}>Thêm bài hát mới</p>
+            <p
+              data-tut='add-music'
+              onClick={() => navigate("/music/add-music")}>
+              Thêm bài hát mới
+            </p>
           </Button>
         </div>
       </div>
-      <Grid container spacing={2}>
+      <Tour
+        onRequestClose={closeTour}
+        steps={MusicTourConfig}
+        isOpen={isTourOpen}
+        rounded={5}
+        accentColor='#1976d2'
+      />
+      <Grid container spacing={2} data-tut='list-music'>
         {filterMusic
           ? filterMusic.map(music => (
               <Grid item md={3} xs={4} key={music.id}>
                 <div className='MusicCard'>
                   <div className='MusicCard__Header'>
                     <EditOutlinedIcon
+                      data-tut='edit-music'
                       onClick={() => navigate(`/music/${music.id}/edit-music`)}
                     />
                     <DeleteOutlineOutlinedIcon
+                      data-tut='delete-music'
                       onClick={e => {
                         handleOpen(music.id);
                       }}

@@ -133,6 +133,7 @@ const TodoTable = () => {
       label: (
         <>
           <ArrowDownwardIcon
+            data-tut="sort-task"
             onClick={() => {
               setIsSortStatus(!isSortStatus);
               if (isSortStatus) {
@@ -306,7 +307,7 @@ const TodoTable = () => {
 
   return (
     <div>
-      <Box sx={{ maxWidth: 200, marginBottom: "20px" }}>
+      <Box sx={{ maxWidth: 200, marginBottom: "20px" }} data-tut="filter-task">
         <FormControl fullWidth>
           <InputLabel id='status-type-label'>Lọc trạng thái</InputLabel>
           <Select
@@ -330,7 +331,7 @@ const TodoTable = () => {
           <div style={style}>Đến giờ rồi bạn ơi !!!</div>
         </div>
 
-        <TableContainer sx={{ maxHeight: 440 }}>
+        <TableContainer sx={{ maxHeight: 440 }} data-tut="table">
           <Table stickyHeader aria-label='sticky table'>
             <TableHead>
               <TableRow>
@@ -356,17 +357,20 @@ const TodoTable = () => {
                             column.id === "action" ? (
                               <>
                                 <NotificationsActiveOutlinedIcon
+                                  data-tut="notice-task"
                                   onClick={() =>
                                     navigate(`/tasks/${row.id}/reminder-task`)
                                   }
                                 />
                                 <EditOutlinedIcon
-                                  style={{ padding: "0 20px" }}
+                                  data-tut="edit-task"
+                                  style={{ margin: "0 20px" }}
                                   onClick={() =>
                                     navigate(`/tasks/${row.id}/edit-task`)
                                   }
                                 />
                                 <DeleteOutlineOutlinedIcon
+                                  data-tut="delete-task"
                                   onClick={e => {
                                     handleOpen(row.id);
                                   }}
@@ -401,6 +405,7 @@ const TodoTable = () => {
                               handleStatusColor(row[column.id])
                             ) : column.id === "checkbox" ? (
                               <Checkbox
+                                data-tut="delete-multi-task"
                                 checked={
                                   listDelete.includes(row.id)
                                     ? isChecked
