@@ -8,13 +8,23 @@ export const TodoListStyle = styled('div')`
         cursor: pointer;
     }
     .Add {
+        display: flex;
         height: 60px;
+        float: right;
         
         .MuiSvgIcon-root {
             font-size: 40px;
-            float: right;
             margin-right: 40px;
         }
+
+        .MuiBadge-root {
+            margin-right: 40px;
+            vertical-align: top;
+            .notice-icon {
+                margin: 0;
+            }
+        }
+
     }
 
     .TodoTable {
