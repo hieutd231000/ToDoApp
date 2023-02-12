@@ -78,6 +78,41 @@ const AddEditTask = () => {
     }
   };
 
+  // format current date
+  const formatCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    return `${year}-${month}-${day}`;
+  };
+
+  // handle localstorage data
+  const handleLocalstorageData = type => {
+    if (!localData) {
+      localStorage.setItem(
+        "data_notice",
+        JSON.stringify([
+          {
+            type: type,
+            task_name: bodyParameters.title,
+            status: bodyParameters.status,
+            time: formatCurrentDate(),
+          },
+        ]),
+      );
+    } else {
+      localData.push({
+        type: type,
+        task_name: bodyParameters.title,
+        status: bodyParameters.status,
+        time: formatCurrentDate(),
+      });
+      localStorage.setItem("data_notice", JSON.stringify(localData));
+    }
+  };
+
+  const localData = JSON.parse(localStorage.getItem("data_notice"));
   // submit task
   const handleSubmit = e => {
     e.preventDefault();
@@ -92,6 +127,7 @@ const AddEditTask = () => {
         .then(res => {
           setLoading(false);
           setEditSuccess(true);
+          handleLocalstorageData("update");
           setTimeout(() => {
             navigate("/home");
           }, 1300);
@@ -110,6 +146,7 @@ const AddEditTask = () => {
         .then(res => {
           setLoading(false);
           setAddSuccess(true);
+          handleLocalstorageData("create");
           setTimeout(() => {
             navigate("/home");
           }, 1300);

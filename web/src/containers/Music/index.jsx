@@ -83,7 +83,6 @@ const Music = () => {
   };
 
   const handleChangeType = event => {
-    console.log(event.target.value);
     if (event.target.value === 0) {
       setFilterMusic(listMusic);
     } else {
@@ -124,7 +123,7 @@ const Music = () => {
       <div className='Header'>
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
-            <InputLabel id='music-type-label'>Music Type</InputLabel>
+            <InputLabel id='music-type-label'>Thể loại nhạc</InputLabel>
             <Select
               labelId='music-type-label'
               id='music'
