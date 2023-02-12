@@ -6,6 +6,22 @@ import { CountdownStyle } from "./index.style";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
+import Tour from "reactour";
+
+const CountdownTourConfig = [
+  {
+    selector: '[data-tut="setting"]',
+    content: "Cài đặt thời gian countdown",
+  },
+  {
+    selector: '[data-tut="continue"]',
+    content: "Tiếp tục hoặc tạm dừng countdown",
+  },
+  {
+    selector: '[data-tut="cancel"]',
+    content: "Thoát khỏi countdown",
+  },
+];
 
 const style = {
   position: "absolute",
@@ -48,6 +64,18 @@ const Countdown = () => {
   const [reminderOpen, setReminderOpen] = useState(false);
 
   const [stop, setStop] = useState(false);
+  const [isTourOpen, setIsTourOpen] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
+
+  const closeTour = () => {
+    setIsTourOpen(false);
+  };
+
+  const openTour = () => {
+    setIsTourOpen(true);
+  };
 
   useEffect(() => {
     timerId.current = setInterval(() => {
@@ -133,17 +161,30 @@ const Countdown = () => {
             <div style={style}>Hết giờ rồi bạn ơi !!!</div>
           </div>
           <div className='Right'>
-            <TipsAndUpdatesIcon />
-            <button className='Add' onClick={() => setOpenAdd(true)}>
+            <TipsAndUpdatesIcon onClick={() => openTour()} />
+            <button
+              data-tut='setting'
+              className='Add'
+              onClick={() => setOpenAdd(true)}>
               Cài đặt
             </button>
           </div>
+          <Tour
+            onRequestClose={closeTour}
+            steps={CountdownTourConfig}
+            isOpen={isTourOpen}
+            rounded={5}
+            accentColor='#1976d2'
+          />
           <div className='Content'>
             <h2>Countdown</h2>
             <div className='Time'>
               <h1>{countdown ? formatTime(countdown) : "00:00:00"}</h1>
               <div className='footer'>
-                <button className='cancel' onClick={() => handleCancel()}>
+                <button
+                  className='cancel'
+                  data-tut='cancel'
+                  onClick={() => handleCancel()}>
                   Thoát
                 </button>
                 {stop ? (
@@ -152,6 +193,7 @@ const Countdown = () => {
                   </button>
                 ) : (
                   <button
+                    data-tut='continue'
                     onClick={() => {
                       setStop(true);
                       clearInterval(timerId.current);
